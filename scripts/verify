@@ -61,6 +61,8 @@ PYTHONDONTWRITEBYTECODE=1 python3 "$spec_runner" \
   --spec "$spec_file" \
   --program "$commonmark_js_program"
 
+"$project_root/scripts/check-fixtures"
+
 verify_clean commonmark-spec
 verify_clean cmark
 verify_clean commonmark.js

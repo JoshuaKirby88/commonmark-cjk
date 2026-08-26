@@ -34,7 +34,10 @@ Defer:
 ## Repository layout
 
 - `reports/baseline.md` records the pinned upstream revisions and untouched test results.
+- `proposal/behavior-matrix.md` lists intended changes and protected behavior.
+- `proposal/rule.md` and `proposal/unicode-policy.md` define the narrow candidate.
 - `scripts/verify` reproduces the complete baseline with read-only upstream access.
 - `upstreams.lock` pins upstream commits and the commonmark.js dependency lock.
+- `research/narrow-rule-evidence.md` documents the candidate rule provenance, proof-implementation behavior, and known hazards.
 - `.worktrees/` is reserved for disposable upstream checkouts and is not committed.
 

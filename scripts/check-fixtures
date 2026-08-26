@@ -1,0 +1,80 @@
+#!/usr/bin/env python3
+
+import json
+from pathlib import Path
+import subprocess
+import sys
+
+
+PROJECT_ROOT = Path(__file__).resolve().parent.parent
+FIXTURE_PATH = PROJECT_ROOT / "fixtures" / "emphasis.json"
+GENERATED_PATH = PROJECT_ROOT / "fixtures" / "generated-boundaries.json"
+
+PROGRAMS = {
+    "cmark": [
+        str(PROJECT_ROOT / ".worktrees" / "cmark" / "build" / "src" / "cmark"),
+        "--unsafe",
+    ],
+    "commonmark.js": [
+        "node",
+        str(PROJECT_ROOT / ".worktrees" / "commonmark.js" / "bin" / "commonmark"),
+    ],
+}
+
+
+def render(program, markdown):
+    result = subprocess.run(
+        program,
+        input=markdown + "\n",
+        text=True,
+        capture_output=True,
+        check=True,
+    )
+    return result.stdout
+
+
+def fail(message):
+    print(message, file=sys.stderr)
+    raise SystemExit(1)
+
+
+fixtures = json.loads(FIXTURE_PATH.read_text(encoding="utf-8"))
+cases = fixtures.get("cases", [])
+if fixtures.get("schema_version") != 1 or not cases:
+    fail("fixtures/emphasis.json has an unsupported schema or no cases.")
+
+seen = set()
+for case in cases:
+    case_id = case["id"]
+    if case_id in seen:
+        fail(f"Duplicate fixture id: {case_id}")
+    seen.add(case_id)
+
+    actual_change = case["current_html"] != case["proposed_html"]
+    if case["change"] != actual_change:
+        fail(f"Incorrect change flag: {case_id}")
+
+    for name, program in PROGRAMS.items():
+        actual = render(program, case["markdown"])
+        if actual != case["current_html"]:
+            fail(
+                f"{name} baseline differs for {case_id}\n"
+                f"expected: {case['current_html']!r}\n"
+                f"actual:   {actual!r}"
+            )
+
+generated = subprocess.run(
+    [str(PROJECT_ROOT / "scripts" / "generate-cases")],
+    text=True,
+    capture_output=True,
+    check=True,
+).stdout
+committed_generated = GENERATED_PATH.read_text(encoding="utf-8")
+if generated != committed_generated:
+    fail("fixtures/generated-boundaries.json is stale. Run scripts/generate-cases.")
+
+changed = sum(case["change"] for case in cases)
+print(
+    f"Fixture oracle verified: {len(cases)} curated cases, "
+    f"{changed} proposed changes, {len(cases) - changed} protected results."
+)

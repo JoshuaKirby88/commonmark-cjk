@@ -1,0 +1,135 @@
+#!/usr/bin/env python3
+
+import json
+
+
+CONTEXTS = [
+    {
+        "id": "whitespace",
+        "character": " ",
+        "whitespace": True,
+        "punctuation_or_symbol": False,
+        "cjk": False,
+    },
+    {
+        "id": "ascii-punctuation",
+        "character": "(",
+        "whitespace": False,
+        "punctuation_or_symbol": True,
+        "cjk": False,
+    },
+    {
+        "id": "ambiguous-punctuation",
+        "character": "“",
+        "whitespace": False,
+        "punctuation_or_symbol": True,
+        "cjk": False,
+    },
+    {
+        "id": "ascii-text",
+        "character": "a",
+        "whitespace": False,
+        "punctuation_or_symbol": False,
+        "cjk": False,
+    },
+    {
+        "id": "cjk-punctuation",
+        "character": "「",
+        "whitespace": False,
+        "punctuation_or_symbol": True,
+        "cjk": True,
+    },
+    {
+        "id": "cjk-text",
+        "character": "語",
+        "whitespace": False,
+        "punctuation_or_symbol": False,
+        "cjk": True,
+    },
+    {
+        "id": "default-emoji",
+        "character": "😀",
+        "whitespace": False,
+        "punctuation_or_symbol": True,
+        "cjk": False,
+    },
+    {
+        "id": "variation-selector",
+        "character": "󠄀",
+        "whitespace": False,
+        "punctuation_or_symbol": False,
+        "cjk": False,
+    },
+    {
+        "id": "unassigned-wide-default",
+        "character": "\U0002FA20",
+        "whitespace": False,
+        "punctuation_or_symbol": False,
+        "cjk": False,
+    },
+]
+
+
+def classify(marker, before, after):
+    current_left = not after["whitespace"] and (
+        not after["punctuation_or_symbol"]
+        or before["whitespace"]
+        or before["punctuation_or_symbol"]
+    )
+    current_right = not before["whitespace"] and (
+        not before["punctuation_or_symbol"]
+        or after["whitespace"]
+        or after["punctuation_or_symbol"]
+    )
+
+    adjacent_cjk = before["cjk"] or after["cjk"]
+    proposed_left = current_left or (
+        not after["whitespace"] and adjacent_cjk
+    )
+    proposed_right = current_right or (
+        not before["whitespace"] and adjacent_cjk
+    )
+
+    def opener(left, right):
+        if marker == "*":
+            return left
+        return left and (not right or before["punctuation_or_symbol"])
+
+    def closer(left, right):
+        if marker == "*":
+            return right
+        return right and (not left or after["punctuation_or_symbol"])
+
+    return {
+        "marker": marker,
+        "before": before["id"],
+        "after": after["id"],
+        "source_shape": before["character"] + marker + after["character"],
+        "current": {
+            "left_flanking": current_left,
+            "right_flanking": current_right,
+            "can_open": opener(current_left, current_right),
+            "can_close": closer(current_left, current_right),
+        },
+        "proposed": {
+            "left_flanking": proposed_left,
+            "right_flanking": proposed_right,
+            "can_open": opener(proposed_left, proposed_right),
+            "can_close": closer(proposed_left, proposed_right),
+        },
+    }
+
+
+document = {
+    "schema_version": 1,
+    "proposal": "narrow-codepoint-v1",
+    "context_classes": CONTEXTS,
+    "boundaries": [
+        classify(marker, before, after)
+        for marker in ("*", "_")
+        for before in CONTEXTS
+        for after in CONTEXTS
+    ],
+}
+
+print(json.dumps(document, ensure_ascii=False, indent=2))

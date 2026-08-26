@@ -1,0 +1,2987 @@
+{
+  "schema_version": 1,
+  "proposal": "narrow-codepoint-v1",
+  "context_classes": [
+    {
+      "id": "whitespace",
+      "character": " ",
+      "whitespace": true,
+      "punctuation_or_symbol": false,
+      "cjk": false
+    },
+    {
+      "id": "ascii-punctuation",
+      "character": "(",
+      "whitespace": false,
+      "punctuation_or_symbol": true,
+      "cjk": false
+    },
+    {
+      "id": "ambiguous-punctuation",
+      "character": "“",
+      "whitespace": false,
+      "punctuation_or_symbol": true,
+      "cjk": false
+    },
+    {
+      "id": "ascii-text",
+      "character": "a",
+      "whitespace": false,
+      "punctuation_or_symbol": false,
+      "cjk": false
+    },
+    {
+      "id": "cjk-punctuation",
+      "character": "「",
+      "whitespace": false,
+      "punctuation_or_symbol": true,
+      "cjk": true
+    },
+    {
+      "id": "cjk-text",
+      "character": "語",
+      "whitespace": false,
+      "punctuation_or_symbol": false,
+      "cjk": true
+    },
+    {
+      "id": "default-emoji",
+      "character": "😀",
+      "whitespace": false,
+      "punctuation_or_symbol": true,
+      "cjk": false
+    },
+    {
+      "id": "variation-selector",
+      "character": "󠄀",
+      "whitespace": false,
+      "punctuation_or_symbol": false,
+      "cjk": false
+    },
+    {
+      "id": "unassigned-wide-default",
+      "character": "𯨠",
+      "whitespace": false,
+      "punctuation_or_symbol": false,
+      "cjk": false
+    }
+  ],
+  "boundaries": [
+    {
+      "marker": "*",
+      "before": "whitespace",
+      "after": "whitespace",
+      "source_shape": " * ",
+      "current": {
+        "left_flanking": false,
+        "right_flanking": false,
+        "can_open": false,
+        "can_close": false
+      },
+      "proposed": {
+        "left_flanking": false,
+        "right_flanking": false,
+        "can_open": false,
+        "can_close": false
+      }
+    },
+    {
+      "marker": "*",
+      "before": "whitespace",
+      "after": "ascii-punctuation",
+      "source_shape": " *(",
+      "current": {
+        "left_flanking": true,
+        "right_flanking": false,
+        "can_open": true,
+        "can_close": false
+      },
+      "proposed": {
+        "left_flanking": true,
+        "right_flanking": false,
+        "can_open": true,
+        "can_close": false
+      }
+    },
+    {
+      "marker": "*",
+      "before": "whitespace",
+      "after": "ambiguous-punctuation",
+      "source_shape": " *“",
+      "current": {
+        "left_flanking": true,
+        "right_flanking": false,
+        "can_open": true,
+        "can_close": false
+      },
+      "proposed": {
+        "left_flanking": true,
+        "right_flanking": false,
+        "can_open": true,
+        "can_close": false
+      }
+    },
+    {
+      "marker": "*",
+      "before": "whitespace",
+      "after": "ascii-text",
+      "source_shape": " *a",
+      "current": {
+        "left_flanking": true,
+        "right_flanking": false,
+        "can_open": true,
+        "can_close": false
+      },
+      "proposed": {
+        "left_flanking": true,
+        "right_flanking": false,
+        "can_open": true,
+        "can_close": false
+      }
+    },
+    {
+      "marker": "*",
+      "before": "whitespace",
+      "after": "cjk-punctuation",
+      "source_shape": " *「",
+      "current": {
+        "left_flanking": true,
+        "right_flanking": false,
+        "can_open": true,
+        "can_close": false
+      },
+      "proposed": {
+        "left_flanking": true,
+        "right_flanking": false,
+        "can_open": true,
+        "can_close": false
+      }
+    },
+    {
+      "marker": "*",
+      "before": "whitespace",
+      "after": "cjk-text",
+      "source_shape": " *語",
+      "current": {
+        "left_flanking": true,
+        "right_flanking": false,
+        "can_open": true,
+        "can_close": false
+      },
+      "proposed": {
+        "left_flanking": true,
+        "right_flanking": false,
+        "can_open": true,
+        "can_close": false
+      }
+    },
+    {
+      "marker": "*",
+      "before": "whitespace",
+      "after": "default-emoji",
+      "source_shape": " *😀",
+      "current": {
+        "left_flanking": true,
+        "right_flanking": false,
+        "can_open": true,
+        "can_close": false
+      },
+      "proposed": {
+        "left_flanking": true,
+        "right_flanking": false,
+        "can_open": true,
+        "can_close": false
+      }
+    },
+    {
+      "marker": "*",
+      "before": "whitespace",
+      "after": "variation-selector",
+      "source_shape": " *󠄀",
+      "current": {
+        "left_flanking": true,
+        "right_flanking": false,
+        "can_open": true,
+        "can_close": false
+      },
+      "proposed": {
+        "left_flanking": true,
+        "right_flanking": false,
+        "can_open": true,
+        "can_close": false
+      }
+    },
+    {
+      "marker": "*",
+      "before": "whitespace",
+      "after": "unassigned-wide-default",
+      "source_shape": " *𯨠",
+      "current": {
+        "left_flanking": true,
+        "right_flanking": false,
+        "can_open": true,
+        "can_close": false
+      },
+      "proposed": {
+        "left_flanking": true,
+        "right_flanking": false,
+        "can_open": true,
+        "can_close": false
+      }
+    },
+    {
+      "marker": "*",
+      "before": "ascii-punctuation",
+      "after": "whitespace",
+      "source_shape": "(* ",
+      "current": {
+        "left_flanking": false,
+        "right_flanking": true,
+        "can_open": false,
+        "can_close": true
+      },
+      "proposed": {
+        "left_flanking": false,
+        "right_flanking": true,
+        "can_open": false,
+        "can_close": true
+      }
+    },
+    {
+      "marker": "*",
+      "before": "ascii-punctuation",
+      "after": "ascii-punctuation",
+      "source_shape": "(*(",
+      "current": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": true,
+        "can_close": true
+      },
+      "proposed": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": true,
+        "can_close": true
+      }
+    },
+    {
+      "marker": "*",
+      "before": "ascii-punctuation",
+      "after": "ambiguous-punctuation",
+      "source_shape": "(*“",
+      "current": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": true,
+        "can_close": true
+      },
+      "proposed": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": true,
+        "can_close": true
+      }
+    },
+    {
+      "marker": "*",
+      "before": "ascii-punctuation",
+      "after": "ascii-text",
+      "source_shape": "(*a",
+      "current": {
+        "left_flanking": true,
+        "right_flanking": false,
+        "can_open": true,
+        "can_close": false
+      },
+      "proposed": {
+        "left_flanking": true,
+        "right_flanking": false,
+        "can_open": true,
+        "can_close": false
+      }
+    },
+    {
+      "marker": "*",
+      "before": "ascii-punctuation",
+      "after": "cjk-punctuation",
+      "source_shape": "(*「",
+      "current": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": true,
+        "can_close": true
+      },
+      "proposed": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": true,
+        "can_close": true
+      }
+    },
+    {
+      "marker": "*",
+      "before": "ascii-punctuation",
+      "after": "cjk-text",
+      "source_shape": "(*語",
+      "current": {
+        "left_flanking": true,
+        "right_flanking": false,
+        "can_open": true,
+        "can_close": false
+      },
+      "proposed": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": true,
+        "can_close": true
+      }
+    },
+    {
+      "marker": "*",
+      "before": "ascii-punctuation",
+      "after": "default-emoji",
+      "source_shape": "(*😀",
+      "current": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": true,
+        "can_close": true
+      },
+      "proposed": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": true,
+        "can_close": true
+      }
+    },
+    {
+      "marker": "*",
+      "before": "ascii-punctuation",
+      "after": "variation-selector",
+      "source_shape": "(*󠄀",
+      "current": {
+        "left_flanking": true,
+        "right_flanking": false,
+        "can_open": true,
+        "can_close": false
+      },
+      "proposed": {
+        "left_flanking": true,
+        "right_flanking": false,
+        "can_open": true,
+        "can_close": false
+      }
+    },
+    {
+      "marker": "*",
+      "before": "ascii-punctuation",
+      "after": "unassigned-wide-default",
+      "source_shape": "(*𯨠",
+      "current": {
+        "left_flanking": true,
+        "right_flanking": false,
+        "can_open": true,
+        "can_close": false
+      },
+      "proposed": {
+        "left_flanking": true,
+        "right_flanking": false,
+        "can_open": true,
+        "can_close": false
+      }
+    },
+    {
+      "marker": "*",
+      "before": "ambiguous-punctuation",
+      "after": "whitespace",
+      "source_shape": "“* ",
+      "current": {
+        "left_flanking": false,
+        "right_flanking": true,
+        "can_open": false,
+        "can_close": true
+      },
+      "proposed": {
+        "left_flanking": false,
+        "right_flanking": true,
+        "can_open": false,
+        "can_close": true
+      }
+    },
+    {
+      "marker": "*",
+      "before": "ambiguous-punctuation",
+      "after": "ascii-punctuation",
+      "source_shape": "“*(",
+      "current": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": true,
+        "can_close": true
+      },
+      "proposed": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": true,
+        "can_close": true
+      }
+    },
+    {
+      "marker": "*",
+      "before": "ambiguous-punctuation",
+      "after": "ambiguous-punctuation",
+      "source_shape": "“*“",
+      "current": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": true,
+        "can_close": true
+      },
+      "proposed": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": true,
+        "can_close": true
+      }
+    },
+    {
+      "marker": "*",
+      "before": "ambiguous-punctuation",
+      "after": "ascii-text",
+      "source_shape": "“*a",
+      "current": {
+        "left_flanking": true,
+        "right_flanking": false,
+        "can_open": true,
+        "can_close": false
+      },
+      "proposed": {
+        "left_flanking": true,
+        "right_flanking": false,
+        "can_open": true,
+        "can_close": false
+      }
+    },
+    {
+      "marker": "*",
+      "before": "ambiguous-punctuation",
+      "after": "cjk-punctuation",
+      "source_shape": "“*「",
+      "current": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": true,
+        "can_close": true
+      },
+      "proposed": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": true,
+        "can_close": true
+      }
+    },
+    {
+      "marker": "*",
+      "before": "ambiguous-punctuation",
+      "after": "cjk-text",
+      "source_shape": "“*語",
+      "current": {
+        "left_flanking": true,
+        "right_flanking": false,
+        "can_open": true,
+        "can_close": false
+      },
+      "proposed": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": true,
+        "can_close": true
+      }
+    },
+    {
+      "marker": "*",
+      "before": "ambiguous-punctuation",
+      "after": "default-emoji",
+      "source_shape": "“*😀",
+      "current": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": true,
+        "can_close": true
+      },
+      "proposed": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": true,
+        "can_close": true
+      }
+    },
+    {
+      "marker": "*",
+      "before": "ambiguous-punctuation",
+      "after": "variation-selector",
+      "source_shape": "“*󠄀",
+      "current": {
+        "left_flanking": true,
+        "right_flanking": false,
+        "can_open": true,
+        "can_close": false
+      },
+      "proposed": {
+        "left_flanking": true,
+        "right_flanking": false,
+        "can_open": true,
+        "can_close": false
+      }
+    },
+    {
+      "marker": "*",
+      "before": "ambiguous-punctuation",
+      "after": "unassigned-wide-default",
+      "source_shape": "“*𯨠",
+      "current": {
+        "left_flanking": true,
+        "right_flanking": false,
+        "can_open": true,
+        "can_close": false
+      },
+      "proposed": {
+        "left_flanking": true,
+        "right_flanking": false,
+        "can_open": true,
+        "can_close": false
+      }
+    },
+    {
+      "marker": "*",
+      "before": "ascii-text",
+      "after": "whitespace",
+      "source_shape": "a* ",
+      "current": {
+        "left_flanking": false,
+        "right_flanking": true,
+        "can_open": false,
+        "can_close": true
+      },
+      "proposed": {
+        "left_flanking": false,
+        "right_flanking": true,
+        "can_open": false,
+        "can_close": true
+      }
+    },
+    {
+      "marker": "*",
+      "before": "ascii-text",
+      "after": "ascii-punctuation",
+      "source_shape": "a*(",
+      "current": {
+        "left_flanking": false,
+        "right_flanking": true,
+        "can_open": false,
+        "can_close": true
+      },
+      "proposed": {
+        "left_flanking": false,
+        "right_flanking": true,
+        "can_open": false,
+        "can_close": true
+      }
+    },
+    {
+      "marker": "*",
+      "before": "ascii-text",
+      "after": "ambiguous-punctuation",
+      "source_shape": "a*“",
+      "current": {
+        "left_flanking": false,
+        "right_flanking": true,
+        "can_open": false,
+        "can_close": true
+      },
+      "proposed": {
+        "left_flanking": false,
+        "right_flanking": true,
+        "can_open": false,
+        "can_close": true
+      }
+    },
+    {
+      "marker": "*",
+      "before": "ascii-text",
+      "after": "ascii-text",
+      "source_shape": "a*a",
+      "current": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": true,
+        "can_close": true
+      },
+      "proposed": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": true,
+        "can_close": true
+      }
+    },
+    {
+      "marker": "*",
+      "before": "ascii-text",
+      "after": "cjk-punctuation",
+      "source_shape": "a*「",
+      "current": {
+        "left_flanking": false,
+        "right_flanking": true,
+        "can_open": false,
+        "can_close": true
+      },
+      "proposed": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": true,
+        "can_close": true
+      }
+    },
+    {
+      "marker": "*",
+      "before": "ascii-text",
+      "after": "cjk-text",
+      "source_shape": "a*語",
+      "current": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": true,
+        "can_close": true
+      },
+      "proposed": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": true,
+        "can_close": true
+      }
+    },
+    {
+      "marker": "*",
+      "before": "ascii-text",
+      "after": "default-emoji",
+      "source_shape": "a*😀",
+      "current": {
+        "left_flanking": false,
+        "right_flanking": true,
+        "can_open": false,
+        "can_close": true
+      },
+      "proposed": {
+        "left_flanking": false,
+        "right_flanking": true,
+        "can_open": false,
+        "can_close": true
+      }
+    },
+    {
+      "marker": "*",
+      "before": "ascii-text",
+      "after": "variation-selector",
+      "source_shape": "a*󠄀",
+      "current": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": true,
+        "can_close": true
+      },
+      "proposed": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": true,
+        "can_close": true
+      }
+    },
+    {
+      "marker": "*",
+      "before": "ascii-text",
+      "after": "unassigned-wide-default",
+      "source_shape": "a*𯨠",
+      "current": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": true,
+        "can_close": true
+      },
+      "proposed": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": true,
+        "can_close": true
+      }
+    },
+    {
+      "marker": "*",
+      "before": "cjk-punctuation",
+      "after": "whitespace",
+      "source_shape": "「* ",
+      "current": {
+        "left_flanking": false,
+        "right_flanking": true,
+        "can_open": false,
+        "can_close": true
+      },
+      "proposed": {
+        "left_flanking": false,
+        "right_flanking": true,
+        "can_open": false,
+        "can_close": true
+      }
+    },
+    {
+      "marker": "*",
+      "before": "cjk-punctuation",
+      "after": "ascii-punctuation",
+      "source_shape": "「*(",
+      "current": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": true,
+        "can_close": true
+      },
+      "proposed": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": true,
+        "can_close": true
+      }
+    },
+    {
+      "marker": "*",
+      "before": "cjk-punctuation",
+      "after": "ambiguous-punctuation",
+      "source_shape": "「*“",
+      "current": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": true,
+        "can_close": true
+      },
+      "proposed": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": true,
+        "can_close": true
+      }
+    },
+    {
+      "marker": "*",
+      "before": "cjk-punctuation",
+      "after": "ascii-text",
+      "source_shape": "「*a",
+      "current": {
+        "left_flanking": true,
+        "right_flanking": false,
+        "can_open": true,
+        "can_close": false
+      },
+      "proposed": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": true,
+        "can_close": true
+      }
+    },
+    {
+      "marker": "*",
+      "before": "cjk-punctuation",
+      "after": "cjk-punctuation",
+      "source_shape": "「*「",
+      "current": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": true,
+        "can_close": true
+      },
+      "proposed": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": true,
+        "can_close": true
+      }
+    },
+    {
+      "marker": "*",
+      "before": "cjk-punctuation",
+      "after": "cjk-text",
+      "source_shape": "「*語",
+      "current": {
+        "left_flanking": true,
+        "right_flanking": false,
+        "can_open": true,
+        "can_close": false
+      },
+      "proposed": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": true,
+        "can_close": true
+      }
+    },
+    {
+      "marker": "*",
+      "before": "cjk-punctuation",
+      "after": "default-emoji",
+      "source_shape": "「*😀",
+      "current": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": true,
+        "can_close": true
+      },
+      "proposed": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": true,
+        "can_close": true
+      }
+    },
+    {
+      "marker": "*",
+      "before": "cjk-punctuation",
+      "after": "variation-selector",
+      "source_shape": "「*󠄀",
+      "current": {
+        "left_flanking": true,
+        "right_flanking": false,
+        "can_open": true,
+        "can_close": false
+      },
+      "proposed": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": true,
+        "can_close": true
+      }
+    },
+    {
+      "marker": "*",
+      "before": "cjk-punctuation",
+      "after": "unassigned-wide-default",
+      "source_shape": "「*𯨠",
+      "current": {
+        "left_flanking": true,
+        "right_flanking": false,
+        "can_open": true,
+        "can_close": false
+      },
+      "proposed": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": true,
+        "can_close": true
+      }
+    },
+    {
+      "marker": "*",
+      "before": "cjk-text",
+      "after": "whitespace",
+      "source_shape": "語* ",
+      "current": {
+        "left_flanking": false,
+        "right_flanking": true,
+        "can_open": false,
+        "can_close": true
+      },
+      "proposed": {
+        "left_flanking": false,
+        "right_flanking": true,
+        "can_open": false,
+        "can_close": true
+      }
+    },
+    {
+      "marker": "*",
+      "before": "cjk-text",
+      "after": "ascii-punctuation",
+      "source_shape": "語*(",
+      "current": {
+        "left_flanking": false,
+        "right_flanking": true,
+        "can_open": false,
+        "can_close": true
+      },
+      "proposed": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": true,
+        "can_close": true
+      }
+    },
+    {
+      "marker": "*",
+      "before": "cjk-text",
+      "after": "ambiguous-punctuation",
+      "source_shape": "語*“",
+      "current": {
+        "left_flanking": false,
+        "right_flanking": true,
+        "can_open": false,
+        "can_close": true
+      },
+      "proposed": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": true,
+        "can_close": true
+      }
+    },
+    {
+      "marker": "*",
+      "before": "cjk-text",
+      "after": "ascii-text",
+      "source_shape": "語*a",
+      "current": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": true,
+        "can_close": true
+      },
+      "proposed": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": true,
+        "can_close": true
+      }
+    },
+    {
+      "marker": "*",
+      "before": "cjk-text",
+      "after": "cjk-punctuation",
+      "source_shape": "語*「",
+      "current": {
+        "left_flanking": false,
+        "right_flanking": true,
+        "can_open": false,
+        "can_close": true
+      },
+      "proposed": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": true,
+        "can_close": true
+      }
+    },
+    {
+      "marker": "*",
+      "before": "cjk-text",
+      "after": "cjk-text",
+      "source_shape": "語*語",
+      "current": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": true,
+        "can_close": true
+      },
+      "proposed": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": true,
+        "can_close": true
+      }
+    },
+    {
+      "marker": "*",
+      "before": "cjk-text",
+      "after": "default-emoji",
+      "source_shape": "語*😀",
+      "current": {
+        "left_flanking": false,
+        "right_flanking": true,
+        "can_open": false,
+        "can_close": true
+      },
+      "proposed": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": true,
+        "can_close": true
+      }
+    },
+    {
+      "marker": "*",
+      "before": "cjk-text",
+      "after": "variation-selector",
+      "source_shape": "語*󠄀",
+      "current": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": true,
+        "can_close": true
+      },
+      "proposed": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": true,
+        "can_close": true
+      }
+    },
+    {
+      "marker": "*",
+      "before": "cjk-text",
+      "after": "unassigned-wide-default",
+      "source_shape": "語*𯨠",
+      "current": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": true,
+        "can_close": true
+      },
+      "proposed": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": true,
+        "can_close": true
+      }
+    },
+    {
+      "marker": "*",
+      "before": "default-emoji",
+      "after": "whitespace",
+      "source_shape": "😀* ",
+      "current": {
+        "left_flanking": false,
+        "right_flanking": true,
+        "can_open": false,
+        "can_close": true
+      },
+      "proposed": {
+        "left_flanking": false,
+        "right_flanking": true,
+        "can_open": false,
+        "can_close": true
+      }
+    },
+    {
+      "marker": "*",
+      "before": "default-emoji",
+      "after": "ascii-punctuation",
+      "source_shape": "😀*(",
+      "current": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": true,
+        "can_close": true
+      },
+      "proposed": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": true,
+        "can_close": true
+      }
+    },
+    {
+      "marker": "*",
+      "before": "default-emoji",
+      "after": "ambiguous-punctuation",
+      "source_shape": "😀*“",
+      "current": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": true,
+        "can_close": true
+      },
+      "proposed": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": true,
+        "can_close": true
+      }
+    },
+    {
+      "marker": "*",
+      "before": "default-emoji",
+      "after": "ascii-text",
+      "source_shape": "😀*a",
+      "current": {
+        "left_flanking": true,
+        "right_flanking": false,
+        "can_open": true,
+        "can_close": false
+      },
+      "proposed": {
+        "left_flanking": true,
+        "right_flanking": false,
+        "can_open": true,
+        "can_close": false
+      }
+    },
+    {
+      "marker": "*",
+      "before": "default-emoji",
+      "after": "cjk-punctuation",
+      "source_shape": "😀*「",
+      "current": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": true,
+        "can_close": true
+      },
+      "proposed": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": true,
+        "can_close": true
+      }
+    },
+    {
+      "marker": "*",
+      "before": "default-emoji",
+      "after": "cjk-text",
+      "source_shape": "😀*語",
+      "current": {
+        "left_flanking": true,
+        "right_flanking": false,
+        "can_open": true,
+        "can_close": false
+      },
+      "proposed": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": true,
+        "can_close": true
+      }
+    },
+    {
+      "marker": "*",
+      "before": "default-emoji",
+      "after": "default-emoji",
+      "source_shape": "😀*😀",
+      "current": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": true,
+        "can_close": true
+      },
+      "proposed": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": true,
+        "can_close": true
+      }
+    },
+    {
+      "marker": "*",
+      "before": "default-emoji",
+      "after": "variation-selector",
+      "source_shape": "😀*󠄀",
+      "current": {
+        "left_flanking": true,
+        "right_flanking": false,
+        "can_open": true,
+        "can_close": false
+      },
+      "proposed": {
+        "left_flanking": true,
+        "right_flanking": false,
+        "can_open": true,
+        "can_close": false
+      }
+    },
+    {
+      "marker": "*",
+      "before": "default-emoji",
+      "after": "unassigned-wide-default",
+      "source_shape": "😀*𯨠",
+      "current": {
+        "left_flanking": true,
+        "right_flanking": false,
+        "can_open": true,
+        "can_close": false
+      },
+      "proposed": {
+        "left_flanking": true,
+        "right_flanking": false,
+        "can_open": true,
+        "can_close": false
+      }
+    },
+    {
+      "marker": "*",
+      "before": "variation-selector",
+      "after": "whitespace",
+      "source_shape": "󠄀* ",
+      "current": {
+        "left_flanking": false,
+        "right_flanking": true,
+        "can_open": false,
+        "can_close": true
+      },
+      "proposed": {
+        "left_flanking": false,
+        "right_flanking": true,
+        "can_open": false,
+        "can_close": true
+      }
+    },
+    {
+      "marker": "*",
+      "before": "variation-selector",
+      "after": "ascii-punctuation",
+      "source_shape": "󠄀*(",
+      "current": {
+        "left_flanking": false,
+        "right_flanking": true,
+        "can_open": false,
+        "can_close": true
+      },
+      "proposed": {
+        "left_flanking": false,
+        "right_flanking": true,
+        "can_open": false,
+        "can_close": true
+      }
+    },
+    {
+      "marker": "*",
+      "before": "variation-selector",
+      "after": "ambiguous-punctuation",
+      "source_shape": "󠄀*“",
+      "current": {
+        "left_flanking": false,
+        "right_flanking": true,
+        "can_open": false,
+        "can_close": true
+      },
+      "proposed": {
+        "left_flanking": false,
+        "right_flanking": true,
+        "can_open": false,
+        "can_close": true
+      }
+    },
+    {
+      "marker": "*",
+      "before": "variation-selector",
+      "after": "ascii-text",
+      "source_shape": "󠄀*a",
+      "current": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": true,
+        "can_close": true
+      },
+      "proposed": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": true,
+        "can_close": true
+      }
+    },
+    {
+      "marker": "*",
+      "before": "variation-selector",
+      "after": "cjk-punctuation",
+      "source_shape": "󠄀*「",
+      "current": {
+        "left_flanking": false,
+        "right_flanking": true,
+        "can_open": false,
+        "can_close": true
+      },
+      "proposed": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": true,
+        "can_close": true
+      }
+    },
+    {
+      "marker": "*",
+      "before": "variation-selector",
+      "after": "cjk-text",
+      "source_shape": "󠄀*語",
+      "current": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": true,
+        "can_close": true
+      },
+      "proposed": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": true,
+        "can_close": true
+      }
+    },
+    {
+      "marker": "*",
+      "before": "variation-selector",
+      "after": "default-emoji",
+      "source_shape": "󠄀*😀",
+      "current": {
+        "left_flanking": false,
+        "right_flanking": true,
+        "can_open": false,
+        "can_close": true
+      },
+      "proposed": {
+        "left_flanking": false,
+        "right_flanking": true,
+        "can_open": false,
+        "can_close": true
+      }
+    },
+    {
+      "marker": "*",
+      "before": "variation-selector",
+      "after": "variation-selector",
+      "source_shape": "󠄀*󠄀",
+      "current": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": true,
+        "can_close": true
+      },
+      "proposed": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": true,
+        "can_close": true
+      }
+    },
+    {
+      "marker": "*",
+      "before": "variation-selector",
+      "after": "unassigned-wide-default",
+      "source_shape": "󠄀*𯨠",
+      "current": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": true,
+        "can_close": true
+      },
+      "proposed": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": true,
+        "can_close": true
+      }
+    },
+    {
+      "marker": "*",
+      "before": "unassigned-wide-default",
+      "after": "whitespace",
+      "source_shape": "𯨠* ",
+      "current": {
+        "left_flanking": false,
+        "right_flanking": true,
+        "can_open": false,
+        "can_close": true
+      },
+      "proposed": {
+        "left_flanking": false,
+        "right_flanking": true,
+        "can_open": false,
+        "can_close": true
+      }
+    },
+    {
+      "marker": "*",
+      "before": "unassigned-wide-default",
+      "after": "ascii-punctuation",
+      "source_shape": "𯨠*(",
+      "current": {
+        "left_flanking": false,
+        "right_flanking": true,
+        "can_open": false,
+        "can_close": true
+      },
+      "proposed": {
+        "left_flanking": false,
+        "right_flanking": true,
+        "can_open": false,
+        "can_close": true
+      }
+    },
+    {
+      "marker": "*",
+      "before": "unassigned-wide-default",
+      "after": "ambiguous-punctuation",
+      "source_shape": "𯨠*“",
+      "current": {
+        "left_flanking": false,
+        "right_flanking": true,
+        "can_open": false,
+        "can_close": true
+      },
+      "proposed": {
+        "left_flanking": false,
+        "right_flanking": true,
+        "can_open": false,
+        "can_close": true
+      }
+    },
+    {
+      "marker": "*",
+      "before": "unassigned-wide-default",
+      "after": "ascii-text",
+      "source_shape": "𯨠*a",
+      "current": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": true,
+        "can_close": true
+      },
+      "proposed": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": true,
+        "can_close": true
+      }
+    },
+    {
+      "marker": "*",
+      "before": "unassigned-wide-default",
+      "after": "cjk-punctuation",
+      "source_shape": "𯨠*「",
+      "current": {
+        "left_flanking": false,
+        "right_flanking": true,
+        "can_open": false,
+        "can_close": true
+      },
+      "proposed": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": true,
+        "can_close": true
+      }
+    },
+    {
+      "marker": "*",
+      "before": "unassigned-wide-default",
+      "after": "cjk-text",
+      "source_shape": "𯨠*語",
+      "current": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": true,
+        "can_close": true
+      },
+      "proposed": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": true,
+        "can_close": true
+      }
+    },
+    {
+      "marker": "*",
+      "before": "unassigned-wide-default",
+      "after": "default-emoji",
+      "source_shape": "𯨠*😀",
+      "current": {
+        "left_flanking": false,
+        "right_flanking": true,
+        "can_open": false,
+        "can_close": true
+      },
+      "proposed": {
+        "left_flanking": false,
+        "right_flanking": true,
+        "can_open": false,
+        "can_close": true
+      }
+    },
+    {
+      "marker": "*",
+      "before": "unassigned-wide-default",
+      "after": "variation-selector",
+      "source_shape": "𯨠*󠄀",
+      "current": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": true,
+        "can_close": true
+      },
+      "proposed": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": true,
+        "can_close": true
+      }
+    },
+    {
+      "marker": "*",
+      "before": "unassigned-wide-default",
+      "after": "unassigned-wide-default",
+      "source_shape": "𯨠*𯨠",
+      "current": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": true,
+        "can_close": true
+      },
+      "proposed": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": true,
+        "can_close": true
+      }
+    },
+    {
+      "marker": "_",
+      "before": "whitespace",
+      "after": "whitespace",
+      "source_shape": " _ ",
+      "current": {
+        "left_flanking": false,
+        "right_flanking": false,
+        "can_open": false,
+        "can_close": false
+      },
+      "proposed": {
+        "left_flanking": false,
+        "right_flanking": false,
+        "can_open": false,
+        "can_close": false
+      }
+    },
+    {
+      "marker": "_",
+      "before": "whitespace",
+      "after": "ascii-punctuation",
+      "source_shape": " _(",
+      "current": {
+        "left_flanking": true,
+        "right_flanking": false,
+        "can_open": true,
+        "can_close": false
+      },
+      "proposed": {
+        "left_flanking": true,
+        "right_flanking": false,
+        "can_open": true,
+        "can_close": false
+      }
+    },
+    {
+      "marker": "_",
+      "before": "whitespace",
+      "after": "ambiguous-punctuation",
+      "source_shape": " _“",
+      "current": {
+        "left_flanking": true,
+        "right_flanking": false,
+        "can_open": true,
+        "can_close": false
+      },
+      "proposed": {
+        "left_flanking": true,
+        "right_flanking": false,
+        "can_open": true,
+        "can_close": false
+      }
+    },
+    {
+      "marker": "_",
+      "before": "whitespace",
+      "after": "ascii-text",
+      "source_shape": " _a",
+      "current": {
+        "left_flanking": true,
+        "right_flanking": false,
+        "can_open": true,
+        "can_close": false
+      },
+      "proposed": {
+        "left_flanking": true,
+        "right_flanking": false,
+        "can_open": true,
+        "can_close": false
+      }
+    },
+    {
+      "marker": "_",
+      "before": "whitespace",
+      "after": "cjk-punctuation",
+      "source_shape": " _「",
+      "current": {
+        "left_flanking": true,
+        "right_flanking": false,
+        "can_open": true,
+        "can_close": false
+      },
+      "proposed": {
+        "left_flanking": true,
+        "right_flanking": false,
+        "can_open": true,
+        "can_close": false
+      }
+    },
+    {
+      "marker": "_",
+      "before": "whitespace",
+      "after": "cjk-text",
+      "source_shape": " _語",
+      "current": {
+        "left_flanking": true,
+        "right_flanking": false,
+        "can_open": true,
+        "can_close": false
+      },
+      "proposed": {
+        "left_flanking": true,
+        "right_flanking": false,
+        "can_open": true,
+        "can_close": false
+      }
+    },
+    {
+      "marker": "_",
+      "before": "whitespace",
+      "after": "default-emoji",
+      "source_shape": " _😀",
+      "current": {
+        "left_flanking": true,
+        "right_flanking": false,
+        "can_open": true,
+        "can_close": false
+      },
+      "proposed": {
+        "left_flanking": true,
+        "right_flanking": false,
+        "can_open": true,
+        "can_close": false
+      }
+    },
+    {
+      "marker": "_",
+      "before": "whitespace",
+      "after": "variation-selector",
+      "source_shape": " _󠄀",
+      "current": {
+        "left_flanking": true,
+        "right_flanking": false,
+        "can_open": true,
+        "can_close": false
+      },
+      "proposed": {
+        "left_flanking": true,
+        "right_flanking": false,
+        "can_open": true,
+        "can_close": false
+      }
+    },
+    {
+      "marker": "_",
+      "before": "whitespace",
+      "after": "unassigned-wide-default",
+      "source_shape": " _𯨠",
+      "current": {
+        "left_flanking": true,
+        "right_flanking": false,
+        "can_open": true,
+        "can_close": false
+      },
+      "proposed": {
+        "left_flanking": true,
+        "right_flanking": false,
+        "can_open": true,
+        "can_close": false
+      }
+    },
+    {
+      "marker": "_",
+      "before": "ascii-punctuation",
+      "after": "whitespace",
+      "source_shape": "(_ ",
+      "current": {
+        "left_flanking": false,
+        "right_flanking": true,
+        "can_open": false,
+        "can_close": true
+      },
+      "proposed": {
+        "left_flanking": false,
+        "right_flanking": true,
+        "can_open": false,
+        "can_close": true
+      }
+    },
+    {
+      "marker": "_",
+      "before": "ascii-punctuation",
+      "after": "ascii-punctuation",
+      "source_shape": "(_(",
+      "current": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": true,
+        "can_close": true
+      },
+      "proposed": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": true,
+        "can_close": true
+      }
+    },
+    {
+      "marker": "_",
+      "before": "ascii-punctuation",
+      "after": "ambiguous-punctuation",
+      "source_shape": "(_“",
+      "current": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": true,
+        "can_close": true
+      },
+      "proposed": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": true,
+        "can_close": true
+      }
+    },
+    {
+      "marker": "_",
+      "before": "ascii-punctuation",
+      "after": "ascii-text",
+      "source_shape": "(_a",
+      "current": {
+        "left_flanking": true,
+        "right_flanking": false,
+        "can_open": true,
+        "can_close": false
+      },
+      "proposed": {
+        "left_flanking": true,
+        "right_flanking": false,
+        "can_open": true,
+        "can_close": false
+      }
+    },
+    {
+      "marker": "_",
+      "before": "ascii-punctuation",
+      "after": "cjk-punctuation",
+      "source_shape": "(_「",
+      "current": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": true,
+        "can_close": true
+      },
+      "proposed": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": true,
+        "can_close": true
+      }
+    },
+    {
+      "marker": "_",
+      "before": "ascii-punctuation",
+      "after": "cjk-text",
+      "source_shape": "(_語",
+      "current": {
+        "left_flanking": true,
+        "right_flanking": false,
+        "can_open": true,
+        "can_close": false
+      },
+      "proposed": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": true,
+        "can_close": false
+      }
+    },
+    {
+      "marker": "_",
+      "before": "ascii-punctuation",
+      "after": "default-emoji",
+      "source_shape": "(_😀",
+      "current": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": true,
+        "can_close": true
+      },
+      "proposed": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": true,
+        "can_close": true
+      }
+    },
+    {
+      "marker": "_",
+      "before": "ascii-punctuation",
+      "after": "variation-selector",
+      "source_shape": "(_󠄀",
+      "current": {
+        "left_flanking": true,
+        "right_flanking": false,
+        "can_open": true,
+        "can_close": false
+      },
+      "proposed": {
+        "left_flanking": true,
+        "right_flanking": false,
+        "can_open": true,
+        "can_close": false
+      }
+    },
+    {
+      "marker": "_",
+      "before": "ascii-punctuation",
+      "after": "unassigned-wide-default",
+      "source_shape": "(_𯨠",
+      "current": {
+        "left_flanking": true,
+        "right_flanking": false,
+        "can_open": true,
+        "can_close": false
+      },
+      "proposed": {
+        "left_flanking": true,
+        "right_flanking": false,
+        "can_open": true,
+        "can_close": false
+      }
+    },
+    {
+      "marker": "_",
+      "before": "ambiguous-punctuation",
+      "after": "whitespace",
+      "source_shape": "“_ ",
+      "current": {
+        "left_flanking": false,
+        "right_flanking": true,
+        "can_open": false,
+        "can_close": true
+      },
+      "proposed": {
+        "left_flanking": false,
+        "right_flanking": true,
+        "can_open": false,
+        "can_close": true
+      }
+    },
+    {
+      "marker": "_",
+      "before": "ambiguous-punctuation",
+      "after": "ascii-punctuation",
+      "source_shape": "“_(",
+      "current": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": true,
+        "can_close": true
+      },
+      "proposed": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": true,
+        "can_close": true
+      }
+    },
+    {
+      "marker": "_",
+      "before": "ambiguous-punctuation",
+      "after": "ambiguous-punctuation",
+      "source_shape": "“_“",
+      "current": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": true,
+        "can_close": true
+      },
+      "proposed": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": true,
+        "can_close": true
+      }
+    },
+    {
+      "marker": "_",
+      "before": "ambiguous-punctuation",
+      "after": "ascii-text",
+      "source_shape": "“_a",
+      "current": {
+        "left_flanking": true,
+        "right_flanking": false,
+        "can_open": true,
+        "can_close": false
+      },
+      "proposed": {
+        "left_flanking": true,
+        "right_flanking": false,
+        "can_open": true,
+        "can_close": false
+      }
+    },
+    {
+      "marker": "_",
+      "before": "ambiguous-punctuation",
+      "after": "cjk-punctuation",
+      "source_shape": "“_「",
+      "current": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": true,
+        "can_close": true
+      },
+      "proposed": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": true,
+        "can_close": true
+      }
+    },
+    {
+      "marker": "_",
+      "before": "ambiguous-punctuation",
+      "after": "cjk-text",
+      "source_shape": "“_語",
+      "current": {
+        "left_flanking": true,
+        "right_flanking": false,
+        "can_open": true,
+        "can_close": false
+      },
+      "proposed": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": true,
+        "can_close": false
+      }
+    },
+    {
+      "marker": "_",
+      "before": "ambiguous-punctuation",
+      "after": "default-emoji",
+      "source_shape": "“_😀",
+      "current": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": true,
+        "can_close": true
+      },
+      "proposed": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": true,
+        "can_close": true
+      }
+    },
+    {
+      "marker": "_",
+      "before": "ambiguous-punctuation",
+      "after": "variation-selector",
+      "source_shape": "“_󠄀",
+      "current": {
+        "left_flanking": true,
+        "right_flanking": false,
+        "can_open": true,
+        "can_close": false
+      },
+      "proposed": {
+        "left_flanking": true,
+        "right_flanking": false,
+        "can_open": true,
+        "can_close": false
+      }
+    },
+    {
+      "marker": "_",
+      "before": "ambiguous-punctuation",
+      "after": "unassigned-wide-default",
+      "source_shape": "“_𯨠",
+      "current": {
+        "left_flanking": true,
+        "right_flanking": false,
+        "can_open": true,
+        "can_close": false
+      },
+      "proposed": {
+        "left_flanking": true,
+        "right_flanking": false,
+        "can_open": true,
+        "can_close": false
+      }
+    },
+    {
+      "marker": "_",
+      "before": "ascii-text",
+      "after": "whitespace",
+      "source_shape": "a_ ",
+      "current": {
+        "left_flanking": false,
+        "right_flanking": true,
+        "can_open": false,
+        "can_close": true
+      },
+      "proposed": {
+        "left_flanking": false,
+        "right_flanking": true,
+        "can_open": false,
+        "can_close": true
+      }
+    },
+    {
+      "marker": "_",
+      "before": "ascii-text",
+      "after": "ascii-punctuation",
+      "source_shape": "a_(",
+      "current": {
+        "left_flanking": false,
+        "right_flanking": true,
+        "can_open": false,
+        "can_close": true
+      },
+      "proposed": {
+        "left_flanking": false,
+        "right_flanking": true,
+        "can_open": false,
+        "can_close": true
+      }
+    },
+    {
+      "marker": "_",
+      "before": "ascii-text",
+      "after": "ambiguous-punctuation",
+      "source_shape": "a_“",
+      "current": {
+        "left_flanking": false,
+        "right_flanking": true,
+        "can_open": false,
+        "can_close": true
+      },
+      "proposed": {
+        "left_flanking": false,
+        "right_flanking": true,
+        "can_open": false,
+        "can_close": true
+      }
+    },
+    {
+      "marker": "_",
+      "before": "ascii-text",
+      "after": "ascii-text",
+      "source_shape": "a_a",
+      "current": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": false,
+        "can_close": false
+      },
+      "proposed": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": false,
+        "can_close": false
+      }
+    },
+    {
+      "marker": "_",
+      "before": "ascii-text",
+      "after": "cjk-punctuation",
+      "source_shape": "a_「",
+      "current": {
+        "left_flanking": false,
+        "right_flanking": true,
+        "can_open": false,
+        "can_close": true
+      },
+      "proposed": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": false,
+        "can_close": true
+      }
+    },
+    {
+      "marker": "_",
+      "before": "ascii-text",
+      "after": "cjk-text",
+      "source_shape": "a_語",
+      "current": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": false,
+        "can_close": false
+      },
+      "proposed": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": false,
+        "can_close": false
+      }
+    },
+    {
+      "marker": "_",
+      "before": "ascii-text",
+      "after": "default-emoji",
+      "source_shape": "a_😀",
+      "current": {
+        "left_flanking": false,
+        "right_flanking": true,
+        "can_open": false,
+        "can_close": true
+      },
+      "proposed": {
+        "left_flanking": false,
+        "right_flanking": true,
+        "can_open": false,
+        "can_close": true
+      }
+    },
+    {
+      "marker": "_",
+      "before": "ascii-text",
+      "after": "variation-selector",
+      "source_shape": "a_󠄀",
+      "current": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": false,
+        "can_close": false
+      },
+      "proposed": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": false,
+        "can_close": false
+      }
+    },
+    {
+      "marker": "_",
+      "before": "ascii-text",
+      "after": "unassigned-wide-default",
+      "source_shape": "a_𯨠",
+      "current": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": false,
+        "can_close": false
+      },
+      "proposed": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": false,
+        "can_close": false
+      }
+    },
+    {
+      "marker": "_",
+      "before": "cjk-punctuation",
+      "after": "whitespace",
+      "source_shape": "「_ ",
+      "current": {
+        "left_flanking": false,
+        "right_flanking": true,
+        "can_open": false,
+        "can_close": true
+      },
+      "proposed": {
+        "left_flanking": false,
+        "right_flanking": true,
+        "can_open": false,
+        "can_close": true
+      }
+    },
+    {
+      "marker": "_",
+      "before": "cjk-punctuation",
+      "after": "ascii-punctuation",
+      "source_shape": "「_(",
+      "current": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": true,
+        "can_close": true
+      },
+      "proposed": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": true,
+        "can_close": true
+      }
+    },
+    {
+      "marker": "_",
+      "before": "cjk-punctuation",
+      "after": "ambiguous-punctuation",
+      "source_shape": "「_“",
+      "current": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": true,
+        "can_close": true
+      },
+      "proposed": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": true,
+        "can_close": true
+      }
+    },
+    {
+      "marker": "_",
+      "before": "cjk-punctuation",
+      "after": "ascii-text",
+      "source_shape": "「_a",
+      "current": {
+        "left_flanking": true,
+        "right_flanking": false,
+        "can_open": true,
+        "can_close": false
+      },
+      "proposed": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": true,
+        "can_close": false
+      }
+    },
+    {
+      "marker": "_",
+      "before": "cjk-punctuation",
+      "after": "cjk-punctuation",
+      "source_shape": "「_「",
+      "current": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": true,
+        "can_close": true
+      },
+      "proposed": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": true,
+        "can_close": true
+      }
+    },
+    {
+      "marker": "_",
+      "before": "cjk-punctuation",
+      "after": "cjk-text",
+      "source_shape": "「_語",
+      "current": {
+        "left_flanking": true,
+        "right_flanking": false,
+        "can_open": true,
+        "can_close": false
+      },
+      "proposed": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": true,
+        "can_close": false
+      }
+    },
+    {
+      "marker": "_",
+      "before": "cjk-punctuation",
+      "after": "default-emoji",
+      "source_shape": "「_😀",
+      "current": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": true,
+        "can_close": true
+      },
+      "proposed": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": true,
+        "can_close": true
+      }
+    },
+    {
+      "marker": "_",
+      "before": "cjk-punctuation",
+      "after": "variation-selector",
+      "source_shape": "「_󠄀",
+      "current": {
+        "left_flanking": true,
+        "right_flanking": false,
+        "can_open": true,
+        "can_close": false
+      },
+      "proposed": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": true,
+        "can_close": false
+      }
+    },
+    {
+      "marker": "_",
+      "before": "cjk-punctuation",
+      "after": "unassigned-wide-default",
+      "source_shape": "「_𯨠",
+      "current": {
+        "left_flanking": true,
+        "right_flanking": false,
+        "can_open": true,
+        "can_close": false
+      },
+      "proposed": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": true,
+        "can_close": false
+      }
+    },
+    {
+      "marker": "_",
+      "before": "cjk-text",
+      "after": "whitespace",
+      "source_shape": "語_ ",
+      "current": {
+        "left_flanking": false,
+        "right_flanking": true,
+        "can_open": false,
+        "can_close": true
+      },
+      "proposed": {
+        "left_flanking": false,
+        "right_flanking": true,
+        "can_open": false,
+        "can_close": true
+      }
+    },
+    {
+      "marker": "_",
+      "before": "cjk-text",
+      "after": "ascii-punctuation",
+      "source_shape": "語_(",
+      "current": {
+        "left_flanking": false,
+        "right_flanking": true,
+        "can_open": false,
+        "can_close": true
+      },
+      "proposed": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": false,
+        "can_close": true
+      }
+    },
+    {
+      "marker": "_",
+      "before": "cjk-text",
+      "after": "ambiguous-punctuation",
+      "source_shape": "語_“",
+      "current": {
+        "left_flanking": false,
+        "right_flanking": true,
+        "can_open": false,
+        "can_close": true
+      },
+      "proposed": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": false,
+        "can_close": true
+      }
+    },
+    {
+      "marker": "_",
+      "before": "cjk-text",
+      "after": "ascii-text",
+      "source_shape": "語_a",
+      "current": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": false,
+        "can_close": false
+      },
+      "proposed": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": false,
+        "can_close": false
+      }
+    },
+    {
+      "marker": "_",
+      "before": "cjk-text",
+      "after": "cjk-punctuation",
+      "source_shape": "語_「",
+      "current": {
+        "left_flanking": false,
+        "right_flanking": true,
+        "can_open": false,
+        "can_close": true
+      },
+      "proposed": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": false,
+        "can_close": true
+      }
+    },
+    {
+      "marker": "_",
+      "before": "cjk-text",
+      "after": "cjk-text",
+      "source_shape": "語_語",
+      "current": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": false,
+        "can_close": false
+      },
+      "proposed": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": false,
+        "can_close": false
+      }
+    },
+    {
+      "marker": "_",
+      "before": "cjk-text",
+      "after": "default-emoji",
+      "source_shape": "語_😀",
+      "current": {
+        "left_flanking": false,
+        "right_flanking": true,
+        "can_open": false,
+        "can_close": true
+      },
+      "proposed": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": false,
+        "can_close": true
+      }
+    },
+    {
+      "marker": "_",
+      "before": "cjk-text",
+      "after": "variation-selector",
+      "source_shape": "語_󠄀",
+      "current": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": false,
+        "can_close": false
+      },
+      "proposed": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": false,
+        "can_close": false
+      }
+    },
+    {
+      "marker": "_",
+      "before": "cjk-text",
+      "after": "unassigned-wide-default",
+      "source_shape": "語_𯨠",
+      "current": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": false,
+        "can_close": false
+      },
+      "proposed": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": false,
+        "can_close": false
+      }
+    },
+    {
+      "marker": "_",
+      "before": "default-emoji",
+      "after": "whitespace",
+      "source_shape": "😀_ ",
+      "current": {
+        "left_flanking": false,
+        "right_flanking": true,
+        "can_open": false,
+        "can_close": true
+      },
+      "proposed": {
+        "left_flanking": false,
+        "right_flanking": true,
+        "can_open": false,
+        "can_close": true
+      }
+    },
+    {
+      "marker": "_",
+      "before": "default-emoji",
+      "after": "ascii-punctuation",
+      "source_shape": "😀_(",
+      "current": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": true,
+        "can_close": true
+      },
+      "proposed": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": true,
+        "can_close": true
+      }
+    },
+    {
+      "marker": "_",
+      "before": "default-emoji",
+      "after": "ambiguous-punctuation",
+      "source_shape": "😀_“",
+      "current": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": true,
+        "can_close": true
+      },
+      "proposed": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": true,
+        "can_close": true
+      }
+    },
+    {
+      "marker": "_",
+      "before": "default-emoji",
+      "after": "ascii-text",
+      "source_shape": "😀_a",
+      "current": {
+        "left_flanking": true,
+        "right_flanking": false,
+        "can_open": true,
+        "can_close": false
+      },
+      "proposed": {
+        "left_flanking": true,
+        "right_flanking": false,
+        "can_open": true,
+        "can_close": false
+      }
+    },
+    {
+      "marker": "_",
+      "before": "default-emoji",
+      "after": "cjk-punctuation",
+      "source_shape": "😀_「",
+      "current": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": true,
+        "can_close": true
+      },
+      "proposed": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": true,
+        "can_close": true
+      }
+    },
+    {
+      "marker": "_",
+      "before": "default-emoji",
+      "after": "cjk-text",
+      "source_shape": "😀_語",
+      "current": {
+        "left_flanking": true,
+        "right_flanking": false,
+        "can_open": true,
+        "can_close": false
+      },
+      "proposed": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": true,
+        "can_close": false
+      }
+    },
+    {
+      "marker": "_",
+      "before": "default-emoji",
+      "after": "default-emoji",
+      "source_shape": "😀_😀",
+      "current": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": true,
+        "can_close": true
+      },
+      "proposed": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": true,
+        "can_close": true
+      }
+    },
+    {
+      "marker": "_",
+      "before": "default-emoji",
+      "after": "variation-selector",
+      "source_shape": "😀_󠄀",
+      "current": {
+        "left_flanking": true,
+        "right_flanking": false,
+        "can_open": true,
+        "can_close": false
+      },
+      "proposed": {
+        "left_flanking": true,
+        "right_flanking": false,
+        "can_open": true,
+        "can_close": false
+      }
+    },
+    {
+      "marker": "_",
+      "before": "default-emoji",
+      "after": "unassigned-wide-default",
+      "source_shape": "😀_𯨠",
+      "current": {
+        "left_flanking": true,
+        "right_flanking": false,
+        "can_open": true,
+        "can_close": false
+      },
+      "proposed": {
+        "left_flanking": true,
+        "right_flanking": false,
+        "can_open": true,
+        "can_close": false
+      }
+    },
+    {
+      "marker": "_",
+      "before": "variation-selector",
+      "after": "whitespace",
+      "source_shape": "󠄀_ ",
+      "current": {
+        "left_flanking": false,
+        "right_flanking": true,
+        "can_open": false,
+        "can_close": true
+      },
+      "proposed": {
+        "left_flanking": false,
+        "right_flanking": true,
+        "can_open": false,
+        "can_close": true
+      }
+    },
+    {
+      "marker": "_",
+      "before": "variation-selector",
+      "after": "ascii-punctuation",
+      "source_shape": "󠄀_(",
+      "current": {
+        "left_flanking": false,
+        "right_flanking": true,
+        "can_open": false,
+        "can_close": true
+      },
+      "proposed": {
+        "left_flanking": false,
+        "right_flanking": true,
+        "can_open": false,
+        "can_close": true
+      }
+    },
+    {
+      "marker": "_",
+      "before": "variation-selector",
+      "after": "ambiguous-punctuation",
+      "source_shape": "󠄀_“",
+      "current": {
+        "left_flanking": false,
+        "right_flanking": true,
+        "can_open": false,
+        "can_close": true
+      },
+      "proposed": {
+        "left_flanking": false,
+        "right_flanking": true,
+        "can_open": false,
+        "can_close": true
+      }
+    },
+    {
+      "marker": "_",
+      "before": "variation-selector",
+      "after": "ascii-text",
+      "source_shape": "󠄀_a",
+      "current": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": false,
+        "can_close": false
+      },
+      "proposed": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": false,
+        "can_close": false
+      }
+    },
+    {
+      "marker": "_",
+      "before": "variation-selector",
+      "after": "cjk-punctuation",
+      "source_shape": "󠄀_「",
+      "current": {
+        "left_flanking": false,
+        "right_flanking": true,
+        "can_open": false,
+        "can_close": true
+      },
+      "proposed": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": false,
+        "can_close": true
+      }
+    },
+    {
+      "marker": "_",
+      "before": "variation-selector",
+      "after": "cjk-text",
+      "source_shape": "󠄀_語",
+      "current": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": false,
+        "can_close": false
+      },
+      "proposed": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": false,
+        "can_close": false
+      }
+    },
+    {
+      "marker": "_",
+      "before": "variation-selector",
+      "after": "default-emoji",
+      "source_shape": "󠄀_😀",
+      "current": {
+        "left_flanking": false,
+        "right_flanking": true,
+        "can_open": false,
+        "can_close": true
+      },
+      "proposed": {
+        "left_flanking": false,
+        "right_flanking": true,
+        "can_open": false,
+        "can_close": true
+      }
+    },
+    {
+      "marker": "_",
+      "before": "variation-selector",
+      "after": "variation-selector",
+      "source_shape": "󠄀_󠄀",
+      "current": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": false,
+        "can_close": false
+      },
+      "proposed": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": false,
+        "can_close": false
+      }
+    },
+    {
+      "marker": "_",
+      "before": "variation-selector",
+      "after": "unassigned-wide-default",
+      "source_shape": "󠄀_𯨠",
+      "current": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": false,
+        "can_close": false
+      },
+      "proposed": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": false,
+        "can_close": false
+      }
+    },
+    {
+      "marker": "_",
+      "before": "unassigned-wide-default",
+      "after": "whitespace",
+      "source_shape": "𯨠_ ",
+      "current": {
+        "left_flanking": false,
+        "right_flanking": true,
+        "can_open": false,
+        "can_close": true
+      },
+      "proposed": {
+        "left_flanking": false,
+        "right_flanking": true,
+        "can_open": false,
+        "can_close": true
+      }
+    },
+    {
+      "marker": "_",
+      "before": "unassigned-wide-default",
+      "after": "ascii-punctuation",
+      "source_shape": "𯨠_(",
+      "current": {
+        "left_flanking": false,
+        "right_flanking": true,
+        "can_open": false,
+        "can_close": true
+      },
+      "proposed": {
+        "left_flanking": false,
+        "right_flanking": true,
+        "can_open": false,
+        "can_close": true
+      }
+    },
+    {
+      "marker": "_",
+      "before": "unassigned-wide-default",
+      "after": "ambiguous-punctuation",
+      "source_shape": "𯨠_“",
+      "current": {
+        "left_flanking": false,
+        "right_flanking": true,
+        "can_open": false,
+        "can_close": true
+      },
+      "proposed": {
+        "left_flanking": false,
+        "right_flanking": true,
+        "can_open": false,
+        "can_close": true
+      }
+    },
+    {
+      "marker": "_",
+      "before": "unassigned-wide-default",
+      "after": "ascii-text",
+      "source_shape": "𯨠_a",
+      "current": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": false,
+        "can_close": false
+      },
+      "proposed": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": false,
+        "can_close": false
+      }
+    },
+    {
+      "marker": "_",
+      "before": "unassigned-wide-default",
+      "after": "cjk-punctuation",
+      "source_shape": "𯨠_「",
+      "current": {
+        "left_flanking": false,
+        "right_flanking": true,
+        "can_open": false,
+        "can_close": true
+      },
+      "proposed": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": false,
+        "can_close": true
+      }
+    },
+    {
+      "marker": "_",
+      "before": "unassigned-wide-default",
+      "after": "cjk-text",
+      "source_shape": "𯨠_語",
+      "current": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": false,
+        "can_close": false
+      },
+      "proposed": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": false,
+        "can_close": false
+      }
+    },
+    {
+      "marker": "_",
+      "before": "unassigned-wide-default",
+      "after": "default-emoji",
+      "source_shape": "𯨠_😀",
+      "current": {
+        "left_flanking": false,
+        "right_flanking": true,
+        "can_open": false,
+        "can_close": true
+      },
+      "proposed": {
+        "left_flanking": false,
+        "right_flanking": true,
+        "can_open": false,
+        "can_close": true
+      }
+    },
+    {
+      "marker": "_",
+      "before": "unassigned-wide-default",
+      "after": "variation-selector",
+      "source_shape": "𯨠_󠄀",
+      "current": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": false,
+        "can_close": false
+      },
+      "proposed": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": false,
+        "can_close": false
+      }
+    },
+    {
+      "marker": "_",
+      "before": "unassigned-wide-default",
+      "after": "unassigned-wide-default",
+      "source_shape": "𯨠_𯨠",
+      "current": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": false,
+        "can_close": false
+      },
+      "proposed": {
+        "left_flanking": true,
+        "right_flanking": true,
+        "can_open": false,
+        "can_close": false
+      }
+    }
+  ]
+}

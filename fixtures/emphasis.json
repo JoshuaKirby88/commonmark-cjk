@@ -1,0 +1,316 @@
+{
+  "schema_version": 1,
+  "proposal": "narrow-codepoint-v1",
+  "cases": [
+    {
+      "id": "ja-simple-quoted",
+      "language": "ja",
+      "markdown": "これは**「重要なこと」**です。",
+      "current_html": "<p>これは**「重要なこと」**です。</p>\n",
+      "proposed_html": "<p>これは<strong>「重要なこと」</strong>です。</p>\n",
+      "change": true,
+      "rationale": "Reported Japanese failure with CJK punctuation on both strong-emphasis boundaries.",
+      "tags": ["asterisk", "strong", "cjk-punctuation", "realistic"]
+    },
+    {
+      "id": "ja-sentence-punctuation",
+      "language": "ja",
+      "markdown": "これは**私のやりたかったこと。**だからするの。",
+      "current_html": "<p>これは**私のやりたかったこと。**だからするの。</p>\n",
+      "proposed_html": "<p>これは<strong>私のやりたかったこと。</strong>だからするの。</p>\n",
+      "change": true,
+      "rationale": "Canonical issue 650 pattern with a Japanese full stop before the closing run.",
+      "tags": ["asterisk", "strong", "cjk-punctuation", "realistic"]
+    },
+    {
+      "id": "ja-corner-quotes-strong",
+      "language": "ja",
+      "markdown": "語**「引用」**語",
+      "current_html": "<p>語**「引用」**語</p>\n",
+      "proposed_html": "<p>語<strong>「引用」</strong>語</p>\n",
+      "change": true,
+      "rationale": "Both delimiter runs adjoin CJK characters and CJK quotation marks.",
+      "tags": ["asterisk", "strong", "cjk-punctuation"]
+    },
+    {
+      "id": "ja-corner-quotes-emphasis",
+      "language": "ja",
+      "markdown": "語*「引用」*語",
+      "current_html": "<p>語*「引用」*語</p>\n",
+      "proposed_html": "<p>語<em>「引用」</em>語</p>\n",
+      "change": true,
+      "rationale": "The same boundary correction applies to single-asterisk emphasis.",
+      "tags": ["asterisk", "emphasis", "cjk-punctuation"]
+    },
+    {
+      "id": "zh-sentence-punctuation",
+      "language": "zh",
+      "markdown": "这是**我想做的事。**所以继续。",
+      "current_html": "<p>这是**我想做的事。**所以继续。</p>\n",
+      "proposed_html": "<p>这是<strong>我想做的事。</strong>所以继续。</p>\n",
+      "change": true,
+      "rationale": "Chinese sentence punctuation produces the same closing-boundary failure.",
+      "tags": ["asterisk", "strong", "cjk-punctuation", "realistic"]
+    },
+    {
+      "id": "zh-punctuation-only",
+      "language": "zh",
+      "markdown": "**。**话",
+      "current_html": "<p>**。**话</p>\n",
+      "proposed_html": "<p><strong>。</strong>话</p>\n",
+      "change": true,
+      "rationale": "Existing commonmark.js regression case for Chinese punctuation followed by Han text.",
+      "tags": ["asterisk", "strong", "cjk-punctuation"]
+    },
+    {
+      "id": "ko-parenthetical",
+      "language": "ko",
+      "markdown": "**안녕(hello)**하세요.",
+      "current_html": "<p>**안녕(hello)**하세요.</p>\n",
+      "proposed_html": "<p><strong>안녕(hello)</strong>하세요.</p>\n",
+      "change": true,
+      "rationale": "Hangul after the closing run makes a parenthetical ending closable.",
+      "tags": ["asterisk", "strong", "hangul", "realistic"]
+    },
+    {
+      "id": "cjk-ascii-parentheses",
+      "language": "und",
+      "markdown": "語**(ABC)**語",
+      "current_html": "<p>語**(ABC)**語</p>\n",
+      "proposed_html": "<p>語<strong>(ABC)</strong>語</p>\n",
+      "change": true,
+      "rationale": "A CJK character on the outside allows ASCII punctuation inside emphasis.",
+      "tags": ["asterisk", "strong", "ascii-punctuation", "mixed-script"]
+    },
+    {
+      "id": "latin-cjk-quotes",
+      "language": "und",
+      "markdown": "a**「x」**b",
+      "current_html": "<p>a**「x」**b</p>\n",
+      "proposed_html": "<p>a<strong>「x」</strong>b</p>\n",
+      "change": true,
+      "rationale": "CJK punctuation triggers the rule even when surrounding letters are Latin.",
+      "tags": ["asterisk", "strong", "cjk-punctuation", "compatibility"]
+    },
+    {
+      "id": "latin-fullwidth-parentheses",
+      "language": "und",
+      "markdown": "a**（x）**b",
+      "current_html": "<p>a**（x）**b</p>\n",
+      "proposed_html": "<p>a<strong>（x）</strong>b</p>\n",
+      "change": true,
+      "rationale": "Fullwidth punctuation has East Asian Width F and triggers the override.",
+      "tags": ["asterisk", "strong", "cjk-punctuation", "compatibility"]
+    },
+    {
+      "id": "latin-curly-quotes",
+      "language": "en",
+      "markdown": "a**“x”**b",
+      "current_html": "<p>a**“x”**b</p>\n",
+      "proposed_html": "<p>a**“x”**b</p>\n",
+      "change": false,
+      "rationale": "Ambiguous-width curly quotes are not CJK under the code-point definition.",
+      "tags": ["asterisk", "strong", "ambiguous-width", "protected"]
+    },
+    {
+      "id": "latin-intraword-asterisk",
+      "language": "en",
+      "markdown": "foo**bar**baz",
+      "current_html": "<p>foo<strong>bar</strong>baz</p>\n",
+      "proposed_html": "<p>foo<strong>bar</strong>baz</p>\n",
+      "change": false,
+      "rationale": "Existing intraword asterisk behavior remains unchanged.",
+      "tags": ["asterisk", "strong", "latin", "protected"]
+    },
+    {
+      "id": "cjk-intraword-underscore",
+      "language": "und",
+      "markdown": "語__強調__語",
+      "current_html": "<p>語__強調__語</p>\n",
+      "proposed_html": "<p>語__強調__語</p>\n",
+      "change": false,
+      "rationale": "CommonMark's underscore-specific intraword restrictions remain in force.",
+      "tags": ["underscore", "strong", "cjk-text", "protected"]
+    },
+    {
+      "id": "cjk-quotes-underscore",
+      "language": "und",
+      "markdown": "語__「強調」__語",
+      "current_html": "<p>語__「強調」__語</p>\n",
+      "proposed_html": "<p>語__「強調」__語</p>\n",
+      "change": false,
+      "rationale": "The proposal does not make double underscores equivalent to double asterisks.",
+      "tags": ["underscore", "strong", "cjk-punctuation", "protected"]
+    },
+    {
+      "id": "ja-simple-quoted-underscore",
+      "language": "ja",
+      "markdown": "みたいに、__「何かの状態を判断する指標・目安」__という比喩的な意味でも使います。",
+      "current_html": "<p>みたいに、__「何かの状態を判断する指標・目安」__という比喩的な意味でも使います。</p>\n",
+      "proposed_html": "<p>みたいに、__「何かの状態を判断する指標・目安」__という比喩的な意味でも使います。</p>\n",
+      "change": false,
+      "rationale": "The exact report remains literal when underscore delimiters are substituted.",
+      "tags": ["underscore", "strong", "cjk-punctuation", "protected"]
+    },
+    {
+      "id": "space-after-opener",
+      "language": "und",
+      "markdown": "語** 強調**語",
+      "current_html": "<p>語** 強調**語</p>\n",
+      "proposed_html": "<p>語** 強調**語</p>\n",
+      "change": false,
+      "rationale": "Whitespace after a delimiter still prevents it from opening.",
+      "tags": ["asterisk", "strong", "whitespace", "protected"]
+    },
+    {
+      "id": "space-before-closer",
+      "language": "und",
+      "markdown": "語**強調 **語",
+      "current_html": "<p>語**強調 **語</p>\n",
+      "proposed_html": "<p>語**強調 **語</p>\n",
+      "change": false,
+      "rationale": "Whitespace before a delimiter still prevents it from closing.",
+      "tags": ["asterisk", "strong", "whitespace", "protected"]
+    },
+    {
+      "id": "default-emoji",
+      "language": "und",
+      "markdown": "a**😀。**b",
+      "current_html": "<p>a**😀。**b</p>\n",
+      "proposed_html": "<p>a**😀。**b</p>\n",
+      "change": false,
+      "rationale": "Default emoji presentation is excluded even though the emoji has width W.",
+      "tags": ["asterisk", "strong", "emoji", "protected"]
+    },
+    {
+      "id": "cjk-outside-emoji-content",
+      "language": "und",
+      "markdown": "語**😀**文",
+      "current_html": "<p>語**😀**文</p>\n",
+      "proposed_html": "<p>語<strong>😀</strong>文</p>\n",
+      "change": true,
+      "rationale": "The surrounding CJK characters trigger both runs even though the emoji does not count as CJK itself.",
+      "tags": ["asterisk", "strong", "emoji", "cjk-text", "compatibility"]
+    },
+    {
+      "id": "cjk-symbol-text",
+      "language": "und",
+      "markdown": "a**㊙x**b",
+      "current_html": "<p>a**㊙x**b</p>\n",
+      "proposed_html": "<p>a<strong>㊙x</strong>b</p>\n",
+      "change": true,
+      "rationale": "The text-default wide CJK symbol triggers the opening override.",
+      "tags": ["asterisk", "strong", "cjk-symbol", "compatibility"]
+    },
+    {
+      "id": "ideographic-variation-deferred",
+      "language": "ja",
+      "markdown": "禰󠄀**(ね)**豆子",
+      "current_html": "<p>禰󠄀**(ね)**豆子</p>\n",
+      "proposed_html": "<p>禰󠄀**(ね)**豆子</p>\n",
+      "change": false,
+      "rationale": "The immediate preceding code point is an ideographic variation selector, which version one defers.",
+      "tags": ["asterisk", "strong", "variation-selector", "deferred"]
+    },
+    {
+      "id": "unassigned-wide-default",
+      "language": "und",
+      "markdown": "\ud87e\ude20**(x)**\ud87e\ude20",
+      "current_html": "<p>\ud87e\ude20**(x)**\ud87e\ude20</p>\n",
+      "proposed_html": "<p>\ud87e\ude20**(x)**\ud87e\ude20</p>\n",
+      "change": false,
+      "rationale": "U+2FA20 has a default wide value in Unicode 17 but is unassigned, so it cannot trigger the CJK override.",
+      "tags": ["asterisk", "unassigned", "unicode", "protected"]
+    },
+    {
+      "id": "non-bmp-han",
+      "language": "ja",
+      "markdown": "𠮷**(U+20BB7)**語",
+      "current_html": "<p>𠮷**(U+20BB7)**語</p>\n",
+      "proposed_html": "<p>𠮷<strong>(U+20BB7)</strong>語</p>\n",
+      "change": true,
+      "rationale": "Supplementary-plane Han characters are code points with East Asian Width W.",
+      "tags": ["asterisk", "strong", "non-bmp", "cjk-text"]
+    },
+    {
+      "id": "thai-deferred",
+      "language": "th",
+      "markdown": "ไทย**(ข้อความ)**ไทย",
+      "current_html": "<p>ไทย**(ข้อความ)**ไทย</p>\n",
+      "proposed_html": "<p>ไทย**(ข้อความ)**ไทย</p>\n",
+      "change": false,
+      "rationale": "Scripts without word spaces outside the CJK definition are a separate proposal.",
+      "tags": ["asterisk", "strong", "non-cjk-script", "deferred"]
+    },
+    {
+      "id": "triple-nested",
+      "language": "und",
+      "markdown": "語***「引用」***語",
+      "current_html": "<p>語***「引用」***語</p>\n",
+      "proposed_html": "<p>語<em><strong>「引用」</strong></em>語</p>\n",
+      "change": true,
+      "rationale": "A run of three asterisks follows the existing emphasis pairing algorithm after flanking changes.",
+      "tags": ["asterisk", "nested", "cjk-punctuation", "compatibility"]
+    },
+    {
+      "id": "nested-inner-emphasis",
+      "language": "und",
+      "markdown": "語**「*引用*」**語",
+      "current_html": "<p>語**「<em>引用</em>」**語</p>\n",
+      "proposed_html": "<p>語<strong>「<em>引用</em>」</strong>語</p>\n",
+      "change": true,
+      "rationale": "The new outer strong delimiters preserve the existing inner emphasis parse.",
+      "tags": ["asterisk", "nested", "cjk-punctuation", "compatibility"]
+    },
+    {
+      "id": "link-at-end",
+      "language": "und",
+      "markdown": "語**[項目](https://example.com)。**文",
+      "current_html": "<p>語**<a href=\"https://example.com\">項目</a>。**文</p>\n",
+      "proposed_html": "<p>語<strong><a href=\"https://example.com\">項目</a>。</strong>文</p>\n",
+      "change": true,
+      "rationale": "Inline links inside the emphasis content retain their existing precedence.",
+      "tags": ["asterisk", "strong", "link", "cjk-punctuation"]
+    },
+    {
+      "id": "code-at-end",
+      "language": "und",
+      "markdown": "語**`code`。**文",
+      "current_html": "<p>語**<code>code</code>。**文</p>\n",
+      "proposed_html": "<p>語<strong><code>code</code>。</strong>文</p>\n",
+      "change": true,
+      "rationale": "Code spans inside the emphasis content retain their existing precedence.",
+      "tags": ["asterisk", "strong", "code", "cjk-punctuation"]
+    },
+    {
+      "id": "non-ascii-backslashes",
+      "language": "und",
+      "markdown": "語**\\「引用\\」**語",
+      "current_html": "<p>語**\\「引用\\」**語</p>\n",
+      "proposed_html": "<p>語<strong>\\「引用\\」</strong>語</p>\n",
+      "change": true,
+      "rationale": "Backslashes do not escape non-ASCII punctuation, so they remain literal inside the new emphasis.",
+      "tags": ["asterisk", "strong", "backslash", "cjk-punctuation"]
+    },
+    {
+      "id": "line-start",
+      "language": "und",
+      "markdown": "**「先頭」**語",
+      "current_html": "<p>**「先頭」**語</p>\n",
+      "proposed_html": "<p><strong>「先頭」</strong>語</p>\n",
+      "change": true,
+      "rationale": "The line boundary remains whitespace while the closing run gains CJK-aware flanking.",
+      "tags": ["asterisk", "strong", "line-boundary", "cjk-punctuation"]
+    },
+    {
+      "id": "empty-cjk-quotes",
+      "language": "und",
+      "markdown": "語**「」**語",
+      "current_html": "<p>語**「」**語</p>\n",
+      "proposed_html": "<p>語<strong>「」</strong>語</p>\n",
+      "change": true,
+      "rationale": "Two CJK punctuation characters can form emphasized content under the same rule.",
+      "tags": ["asterisk", "strong", "cjk-punctuation"]
+    }
+  ]
+}
