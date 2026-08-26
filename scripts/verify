@@ -1,0 +1,68 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+project_root=$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)
+worktree_root="$project_root/.worktrees"
+
+# shellcheck source=../upstreams.lock
+source "$project_root/upstreams.lock"
+
+"$project_root/scripts/bootstrap"
+
+verify_commit() {
+  local name=$1
+  local expected=$2
+  local actual
+  actual=$(git -C "$worktree_root/$name" rev-parse HEAD)
+  if [[ "$actual" != "$expected" ]]; then
+    echo "$name is at $actual, expected $expected" >&2
+    exit 1
+  fi
+}
+
+verify_clean() {
+  local name=$1
+  local changes
+  changes=$(git -C "$worktree_root/$name" status --porcelain)
+  if [[ -n "$changes" ]]; then
+    echo "$name has unexpected changes after verification:" >&2
+    echo "$changes" >&2
+    exit 1
+  fi
+}
+
+verify_commit commonmark-spec "$COMMONMARK_SPEC_COMMIT"
+verify_commit cmark "$CMARK_COMMIT"
+verify_commit commonmark.js "$COMMONMARK_JS_COMMIT"
+
+ctest --test-dir "$worktree_root/cmark/build" --output-on-failure
+npm test --prefix "$worktree_root/commonmark.js"
+
+spec_runner="$worktree_root/commonmark-spec/test/spec_tests.py"
+spec_file="$worktree_root/commonmark-spec/spec.txt"
+cmark_program="$worktree_root/cmark/build/src/cmark --unsafe"
+commonmark_js_program="node $worktree_root/commonmark.js/bin/commonmark"
+
+example_count=$(
+  PYTHONDONTWRITEBYTECODE=1 python3 "$spec_runner" --spec "$spec_file" --dump-tests |
+    python3 -c 'import json, sys; print(len(json.load(sys.stdin)))'
+)
+if [[ "$example_count" != "655" ]]; then
+  echo "Expected 655 CommonMark examples, found $example_count." >&2
+  exit 1
+fi
+
+PYTHONDONTWRITEBYTECODE=1 python3 "$spec_runner" \
+  --spec "$spec_file" \
+  --program "$cmark_program"
+
+PYTHONDONTWRITEBYTECODE=1 python3 "$spec_runner" \
+  --spec "$spec_file" \
+  --program "$commonmark_js_program"
+
+verify_clean commonmark-spec
+verify_clean cmark
+verify_clean commonmark.js
+
+echo "Baseline verified: 655 CommonMark examples pass in both reference parsers."

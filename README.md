@@ -6,6 +6,8 @@ The immediate goal is a focused, reviewable change to the CommonMark specificati
 
 ## Current status
 
+The project is preparing a focused CommonMark proposal.
+
 We are still choosing the exact normative boundary. No implementation scope has been accepted yet.
 
 The leading option is the narrow rule tested by the CommonMark maintainers in 2024: when a delimiter run is adjacent to a defined CJK character, treat it as both left-flanking and right-flanking. Before implementing it, we need agreement on the character definition and on which Unicode sequence edge cases belong in the first proposal.
@@ -31,5 +33,8 @@ Defer:
 
 ## Repository layout
 
+- `reports/baseline.md` records the pinned upstream revisions and untouched test results.
+- `scripts/verify` reproduces the complete baseline with read-only upstream access.
+- `upstreams.lock` pins upstream commits and the commonmark.js dependency lock.
 - `.worktrees/` is reserved for disposable upstream checkouts and is not committed.
 
