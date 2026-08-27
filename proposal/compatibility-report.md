@@ -13,7 +13,7 @@ disagreements in the tested corpus.
 
 - Both parsers preserve all 655 existing CommonMark examples.
 - Both parsers pass the 22 new CJK examples, for 677 proposed examples total.
-- Both parsers match all 31 curated fixtures. Twenty change as approved and 11
+- Both parsers match all 32 curated fixtures. Twenty-one change under the proposed rule and 11
   remain protected.
 - Both parsers agree across 13,122 systematic delimiter documents. Exactly 833
   outputs change. Every change uses asterisks and has an opener or closer
@@ -26,7 +26,7 @@ disagreements in the tested corpus.
 
 ## Intended core changes
 
-These ten curated changes directly exercise the reported failure or the same
+These 11 curated changes directly exercise the reported failure or the same
 failure in Japanese, Chinese, and Korean.
 
 | Fixture | Purpose |
@@ -38,6 +38,7 @@ failure in Japanese, Chinese, and Korean.
 | `zh-sentence-punctuation` | Handles the equivalent Chinese sentence pattern |
 | `zh-punctuation-only` | Fixes the existing commonmark.js issue 108 example |
 | `ko-parenthetical` | Includes ordinary Hangul text |
+| `ko-link-particle` | Handles linked strong text followed by a Korean particle |
 | `cjk-ascii-parentheses` | Allows ASCII punctuation inside CJK emphasis |
 | `non-bmp-han` | Handles supplementary-plane Han as a code point |
 | `line-start` | Handles CJK punctuation at the start of a line |
@@ -51,6 +52,8 @@ Representative change:
 ```html
 <p>これは<strong>「重要なこと」</strong>です。</p>
 ```
+
+The later `ko-link-particle` fixture adds coverage for behavior already determined by the proposed rule. It introduces no new semantic choice.
 
 ## Documented direct consequences
 
@@ -115,7 +118,7 @@ definition. The generator reproduces the same 68 ranges for both parsers.
 
 | Class | Count | Submission status |
 | --- | ---: | --- |
-| Intended core changes | 10 | Accept |
+| Intended core changes | 11 | Accept |
 | Documented direct consequences | 10 | Requires the stated mixed-text policy |
 | Protected curated outputs | 11 | Required non-changes |
 | Unexplained differences | 0 | None |

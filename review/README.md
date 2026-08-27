@@ -61,7 +61,7 @@ The review forms contain no new expected behavior. Their cases map to the fixtur
 | --- | --- |
 | `JA-01`, `JA-02` | `ja-simple-quoted`, `ja-sentence-punctuation` |
 | `ZH-01`, `ZH-02` | `zh-sentence-punctuation`, `zh-punctuation-only` |
-| `KO-01` | `ko-parenthetical` |
+| `KO-01`, `KO-02` | `ko-parenthetical`, `ko-link-particle` |
 | `L-01` | `ja-corner-quotes-strong`, `cjk-quotes-underscore` |
 | `L-02` | `space-after-opener`, `space-before-closer` |
 | `L-03` | `latin-cjk-quotes` |

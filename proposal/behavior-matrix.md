@@ -24,6 +24,7 @@ This matrix applies four choices:
 | Chinese sentence ending | `这是**我想做的事。**所以` | The sentence fragment becomes `<strong>` |
 | Chinese punctuation | `**。**话` | `。` becomes `<strong>` |
 | Korean parenthetical | `**안녕(hello)**하세요.` | `안녕(hello)` becomes `<strong>` |
+| Korean link and particle | `**[Markdown](https://commonmark.org/help/)**을 사용하세요.` | The linked word becomes `<strong>` |
 | ASCII punctuation in CJK | `語**(ABC)**語` | `(ABC)` becomes `<strong>` |
 | Supplementary Han | `𠮷**(U+20BB7)**語` | `(U+20BB7)` becomes `<strong>` |
 
@@ -44,7 +45,7 @@ These are not accidental. They follow directly from classifying the adjacent cod
 | `語**[項目](https://example.com)。**文` | Link and punctuation become `<strong>` | Link precedence is unchanged |
 | ``語**`code`。**文`` | Code span and punctuation become `<strong>` | Code-span precedence is unchanged |
 
-The full curated set has 20 changed outputs. The JSON fixture records the complete expected HTML for each one.
+The full curated set has 21 changed outputs. The JSON fixture records the complete expected HTML for each one.
 
 ## Protected behavior
 
@@ -91,7 +92,7 @@ Results:
 
 `scripts/check-fixtures` currently verifies:
 
-- both untouched reference parsers match `current_html` for all 31 curated cases;
+- both untouched reference parsers match `current_html` for all 32 curated cases;
 - cmark and commonmark.js agree on every current result;
 - every `change` flag matches the old-versus-proposed HTML pair;
 - the committed 162-record boundary matrix exactly matches the generator.

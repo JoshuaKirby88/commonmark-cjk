@@ -73,6 +73,16 @@
       "tags": ["asterisk", "strong", "hangul", "realistic"]
     },
     {
+      "id": "ko-link-particle",
+      "language": "ko",
+      "markdown": "문서를 만들 때 Excel 대신 **[Markdown](https://commonmark.org/help/)**을 사용하세요.",
+      "current_html": "<p>문서를 만들 때 Excel 대신 **<a href=\"https://commonmark.org/help/\">Markdown</a>**을 사용하세요.</p>\n",
+      "proposed_html": "<p>문서를 만들 때 Excel 대신 <strong><a href=\"https://commonmark.org/help/\">Markdown</a></strong>을 사용하세요.</p>\n",
+      "change": true,
+      "rationale": "A natural Korean particle after linked strong text makes the closing run fail under current CommonMark.",
+      "tags": ["asterisk", "strong", "hangul", "link", "realistic"]
+    },
+    {
       "id": "cjk-ascii-parentheses",
       "language": "und",
       "markdown": "語**(ABC)**語",

@@ -116,6 +116,24 @@ Proposed result:
 
 Answer: __________
 
+### KO-02: linked term followed by a Korean particle
+
+Source Markdown:
+
+```markdown
+문서를 만들 때 Excel 대신 **[Markdown](https://commonmark.org/help/)**을 사용하세요.
+```
+
+Current result:
+
+<div lang="ko">문서를 만들 때 Excel 대신 **<a href="https://commonmark.org/help/">Markdown</a>**을 사용하세요.</div>
+
+Proposed result:
+
+<div lang="ko">문서를 만들 때 Excel 대신 <strong><a href="https://commonmark.org/help/">Markdown</a></strong>을 사용하세요.</div>
+
+Answer: __________
+
 ## Shared policy checks
 
 Review these after the language-specific section.
