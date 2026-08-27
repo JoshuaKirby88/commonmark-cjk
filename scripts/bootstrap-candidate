@@ -95,6 +95,8 @@ ensure_candidate cmark "$CMARK_URL" "$CMARK_COMMIT" \
   "$project_root/patches/cmark.patch"
 ensure_candidate commonmark.js "$COMMONMARK_JS_URL" "$COMMONMARK_JS_COMMIT" \
   "$project_root/patches/commonmark.js.patch"
+ensure_candidate commonmark-spec "$COMMONMARK_SPEC_URL" "$COMMONMARK_SPEC_COMMIT" \
+  "$project_root/patches/commonmark-spec.patch"
 
 ensure_unicode_file DerivedGeneralCategory.txt \
   "$UNICODE_DERIVED_GENERAL_CATEGORY_URL" \

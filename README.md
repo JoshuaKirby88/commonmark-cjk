@@ -36,6 +36,7 @@ Defer:
 - `reports/baseline.md` records the pinned upstream revisions and untouched test results.
 - `proposal/behavior-matrix.md` lists intended changes and protected behavior.
 - `proposal/rule.md` and `proposal/unicode-policy.md` define the narrow candidate.
+- `patches/commonmark-spec.patch`, `patches/cmark.patch`, and `patches/commonmark.js.patch` contain the three pinned candidate diffs.
 - `scripts/verify` reproduces the baseline and the local parser candidates with read-only upstream access.
 - `scripts/verify --baseline` runs only the untouched-parser checks.
 - `scripts/generate-unicode-tables` reproduces the shared Unicode 17 classifier.

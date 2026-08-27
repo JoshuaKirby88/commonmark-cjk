@@ -82,20 +82,32 @@ fi
 
 candidate_cmark_program="$worktree_root/cmark-candidate/build/src/cmark --unsafe"
 candidate_commonmark_js_program="node $worktree_root/commonmark.js-candidate/bin/commonmark"
+candidate_spec_runner="$worktree_root/commonmark-spec-candidate/test/spec_tests.py"
+candidate_spec_file="$worktree_root/commonmark-spec-candidate/spec.txt"
 
 ctest --test-dir "$worktree_root/cmark-candidate/build" --output-on-failure
 npm test --prefix "$worktree_root/commonmark.js-candidate"
 npm run lint --prefix "$worktree_root/commonmark.js-candidate"
 
-PYTHONDONTWRITEBYTECODE=1 python3 "$spec_runner" \
-  --spec "$spec_file" \
+candidate_example_count=$(
+  PYTHONDONTWRITEBYTECODE=1 python3 "$candidate_spec_runner" \
+    --spec "$candidate_spec_file" --dump-tests |
+    python3 -c 'import json, sys; print(len(json.load(sys.stdin)))'
+)
+if [[ "$candidate_example_count" != "677" ]]; then
+  echo "Expected 677 candidate CommonMark examples, found $candidate_example_count." >&2
+  exit 1
+fi
+
+PYTHONDONTWRITEBYTECODE=1 python3 "$candidate_spec_runner" \
+  --spec "$candidate_spec_file" \
   --program "$candidate_cmark_program"
 
-PYTHONDONTWRITEBYTECODE=1 python3 "$spec_runner" \
-  --spec "$spec_file" \
+PYTHONDONTWRITEBYTECODE=1 python3 "$candidate_spec_runner" \
+  --spec "$candidate_spec_file" \
   --program "$candidate_commonmark_js_program"
 
 "$project_root/scripts/check-fixtures" --candidate
 "$project_root/scripts/generate-unicode-tables" --check
 
-echo "Candidate verified: both parsers match all proposed fixtures and 655 existing CommonMark examples."
+echo "Candidate verified: both parsers pass all 677 proposed CommonMark examples."
