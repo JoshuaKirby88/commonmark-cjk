@@ -109,5 +109,7 @@ PYTHONDONTWRITEBYTECODE=1 python3 "$candidate_spec_runner" \
 
 "$project_root/scripts/check-fixtures" --candidate
 "$project_root/scripts/generate-unicode-tables" --check
+"$project_root/scripts/differential-test"
+"$project_root/scripts/robustness-test"
 
 echo "Candidate verified: both parsers pass all 677 proposed CommonMark examples."

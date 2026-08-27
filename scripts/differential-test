@@ -1,0 +1,213 @@
+#!/usr/bin/env python3
+
+import json
+from pathlib import Path
+import random
+import subprocess
+import sys
+
+
+PROJECT_ROOT = Path(__file__).resolve().parent.parent
+BOUNDARY_PATH = PROJECT_ROOT / "fixtures" / "generated-boundaries.json"
+
+PROGRAMS = {
+    "baseline-cmark": [
+        str(PROJECT_ROOT / ".worktrees" / "cmark" / "build" / "src" / "cmark"),
+        "--unsafe",
+    ],
+    "baseline-commonmark.js": [
+        "node",
+        str(PROJECT_ROOT / ".worktrees" / "commonmark.js" / "bin" / "commonmark"),
+    ],
+    "candidate-cmark": [
+        str(
+            PROJECT_ROOT
+            / ".worktrees"
+            / "cmark-candidate"
+            / "build"
+            / "src"
+            / "cmark"
+        ),
+        "--unsafe",
+    ],
+    "candidate-commonmark.js": [
+        "node",
+        str(
+            PROJECT_ROOT
+            / ".worktrees"
+            / "commonmark.js-candidate"
+            / "bin"
+            / "commonmark"
+        ),
+    ],
+}
+
+
+def fail(message):
+    print(message, file=sys.stderr)
+    raise SystemExit(1)
+
+
+def render_batch(program, documents):
+    markdown = "\n\n".join(
+        f"###### CM-CJK-{index}\n\n{document}"
+        for index, document in enumerate(documents)
+    ) + "\n"
+    result = subprocess.run(
+        program,
+        input=markdown,
+        text=True,
+        capture_output=True,
+        check=True,
+        timeout=30,
+    )
+    outputs = []
+    current = None
+    for line in result.stdout.splitlines():
+        if line.startswith("<h6>CM-CJK-") and line.endswith("</h6>"):
+            if current is not None:
+                outputs.append("\n".join(current))
+            expected_marker = f"<h6>CM-CJK-{len(outputs)}</h6>"
+            if line != expected_marker:
+                fail(f"Unexpected batch marker from {program[0]}: {line}")
+            current = []
+        elif current is not None:
+            current.append(line)
+    if current is not None:
+        outputs.append("\n".join(current))
+    if len(outputs) != len(documents):
+        fail(
+            f"{program[0]} returned {len(outputs)} output segments for "
+            f"{len(documents)} documents."
+        )
+    return outputs
+
+
+def render_all(documents):
+    return {
+        name: render_batch(program, documents)
+        for name, program in PROGRAMS.items()
+    }
+
+
+def assert_parser_agreement(outputs, label):
+    pairs = (
+        ("baseline-cmark", "baseline-commonmark.js"),
+        ("candidate-cmark", "candidate-commonmark.js"),
+    )
+    for left_name, right_name in pairs:
+        for index, (left, right) in enumerate(
+            zip(outputs[left_name], outputs[right_name])
+        ):
+            if left != right:
+                fail(
+                    f"{label} parser disagreement at document {index}:\n"
+                    f"{left_name}: {left!r}\n{right_name}: {right!r}"
+                )
+
+
+boundary_data = json.loads(BOUNDARY_PATH.read_text(encoding="utf-8"))
+context_characters = {
+    context["id"]: context["character"]
+    for context in boundary_data["context_classes"]
+}
+
+systematic_documents = []
+systematic_metadata = []
+for marker in ("*", "_"):
+    marker_boundaries = [
+        boundary
+        for boundary in boundary_data["boundaries"]
+        if boundary["marker"] == marker
+    ]
+    for opener in marker_boundaries:
+        for closer in marker_boundaries:
+            source = (
+                context_characters[opener["before"]]
+                + marker
+                + context_characters[opener["after"]]
+                + "x"
+                + context_characters[closer["before"]]
+                + marker
+                + context_characters[closer["after"]]
+            )
+            systematic_documents.append(source)
+            eligibility_changed = any(
+                boundary["current"][field] != boundary["proposed"][field]
+                for boundary in (opener, closer)
+                for field in ("can_open", "can_close")
+            )
+            systematic_metadata.append(
+                {
+                    "marker": marker,
+                    "eligibility_changed": eligibility_changed,
+                }
+            )
+
+systematic_outputs = render_all(systematic_documents)
+assert_parser_agreement(systematic_outputs, "systematic")
+
+systematic_changes = 0
+asterisk_changes = 0
+underscore_changes = 0
+for index, metadata in enumerate(systematic_metadata):
+    current = systematic_outputs["baseline-cmark"][index]
+    proposed = systematic_outputs["candidate-cmark"][index]
+    if current == proposed:
+        continue
+    systematic_changes += 1
+    if metadata["marker"] == "*":
+        asterisk_changes += 1
+    else:
+        underscore_changes += 1
+    if not metadata["eligibility_changed"]:
+        fail(
+            "Output changed without a generated opener or closer eligibility "
+            f"change: {systematic_documents[index]!r}"
+        )
+
+random_source = random.Random(650)
+fuzz_characters = [
+    "a",
+    "x",
+    " ",
+    "(",
+    "“",
+    "語",
+    "「",
+    "안",
+    "😀",
+    "𠮷",
+    "󠄀",
+    "\U0002FA20",
+]
+fuzz_delimiters = ["*", "**", "***", "_", "__", "___"]
+fuzz_documents = []
+for _ in range(5000):
+    token_count = random_source.randint(4, 30)
+    tokens = ["x"]
+    for _ in range(token_count):
+        choices = fuzz_delimiters if random_source.random() < 0.3 else fuzz_characters
+        tokens.append(random_source.choice(choices))
+    tokens.append("x")
+    fuzz_documents.append("".join(tokens))
+
+fuzz_outputs = render_all(fuzz_documents)
+assert_parser_agreement(fuzz_outputs, "seeded fuzz")
+fuzz_changes = sum(
+    current != proposed
+    for current, proposed in zip(
+        fuzz_outputs["baseline-cmark"], fuzz_outputs["candidate-cmark"]
+    )
+)
+
+if underscore_changes != 0:
+    fail(f"Underscore output changed in {underscore_changes} systematic cases.")
+
+print(
+    "Differential verification passed: "
+    f"{len(systematic_documents)} systematic documents "
+    f"({systematic_changes} changed, {asterisk_changes} asterisk, "
+    f"{underscore_changes} underscore) and {len(fuzz_documents)} seeded documents "
+    f"({fuzz_changes} changed)."
+)

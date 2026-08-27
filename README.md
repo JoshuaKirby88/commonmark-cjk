@@ -36,10 +36,13 @@ Defer:
 - `reports/baseline.md` records the pinned upstream revisions and untouched test results.
 - `proposal/behavior-matrix.md` lists intended changes and protected behavior.
 - `proposal/rule.md` and `proposal/unicode-policy.md` define the narrow candidate.
+- `proposal/compatibility-report.md` and `proposal/performance-report.md` record verification results.
 - `patches/commonmark-spec.patch`, `patches/cmark.patch`, and `patches/commonmark.js.patch` contain the three pinned candidate diffs.
 - `scripts/verify` reproduces the baseline and the local parser candidates with read-only upstream access.
 - `scripts/verify --baseline` runs only the untouched-parser checks.
 - `scripts/generate-unicode-tables` reproduces the shared Unicode 17 classifier.
+- `scripts/differential-test` and `scripts/robustness-test` exercise compatibility and failure boundaries.
+- `scripts/benchmark` reproduces the performance measurement separately.
 - `upstreams.lock` pins upstream commits and the commonmark.js dependency lock.
 - `research/narrow-rule-evidence.md` documents the candidate rule provenance, proof-implementation behavior, and known hazards.
 - `.worktrees/` is reserved for disposable upstream checkouts and is not committed.

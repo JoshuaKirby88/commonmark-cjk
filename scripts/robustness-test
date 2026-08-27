@@ -1,0 +1,88 @@
+#!/usr/bin/env python3
+
+from pathlib import Path
+import subprocess
+import sys
+
+
+PROJECT_ROOT = Path(__file__).resolve().parent.parent
+PROGRAMS = {
+    "cmark": [
+        str(
+            PROJECT_ROOT
+            / ".worktrees"
+            / "cmark-candidate"
+            / "build"
+            / "src"
+            / "cmark"
+        ),
+        "--unsafe",
+    ],
+    "commonmark.js": [
+        "node",
+        str(
+            PROJECT_ROOT
+            / ".worktrees"
+            / "commonmark.js-candidate"
+            / "bin"
+            / "commonmark"
+        ),
+    ],
+}
+
+
+def fail(message):
+    print(message, file=sys.stderr)
+    raise SystemExit(1)
+
+
+def render(program, markdown):
+    return subprocess.run(
+        program,
+        input=markdown,
+        capture_output=True,
+        check=True,
+        timeout=20,
+    ).stdout
+
+
+valid_cases = {
+    "long-cjk-prose": ("語**「引用」**語" * 20000 + "\n").encode(),
+    "long-supplementary-prose": ("𠮷**(x)**語" * 20000 + "\n").encode(),
+    "long-unmatched-run": ("語" + "*" * 100000 + "「x」\n").encode(),
+    "deep-cjk-nesting": (
+        ("語*" * 1000) + "中心" + ("*語" * 1000) + "\n"
+    ).encode(),
+    "deferred-sequences": ("禰󠄀**(ね)**豆子 " * 20000 + "\n").encode(),
+}
+
+for case_name, markdown in valid_cases.items():
+    outputs = {
+        name: render(program, markdown) for name, program in PROGRAMS.items()
+    }
+    if outputs["cmark"] != outputs["commonmark.js"]:
+        fail(f"Candidate parser disagreement for robustness case {case_name}.")
+    if len(outputs["cmark"]) > len(markdown) * 8 + 1024:
+        fail(f"Unexpected output growth for robustness case {case_name}.")
+
+invalid_utf8_cases = {
+    "isolated-continuation": b"\x80**(x)**\xe8\xaa\x9e\n",
+    "truncated-three-byte": b"\xe8\xaa**(x)**\xe8\xaa\x9e\n",
+    "out-of-range": b"\xf4\x90\x80\x80**(x)**\xe8\xaa\x9e\n",
+    "surrogate-encoding": b"\xed\xa0\x80**(x)**\xe8\xaa\x9e\n",
+}
+
+for case_name, markdown in invalid_utf8_cases.items():
+    for parser_name, program in PROGRAMS.items():
+        output = render(program, markdown)
+        if len(output) > len(markdown) * 8 + 1024:
+            fail(
+                f"Unexpected output growth for invalid input {case_name} "
+                f"in {parser_name}."
+            )
+
+print(
+    "Robustness verification passed: "
+    f"{len(valid_cases)} long valid cases agree and "
+    f"{len(invalid_utf8_cases)} malformed UTF-8 cases terminate in both runtimes."
+)

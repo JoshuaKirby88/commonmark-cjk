@@ -1,0 +1,184 @@
+#!/usr/bin/env python3
+
+import argparse
+import json
+from pathlib import Path
+import platform
+import statistics
+import subprocess
+import sys
+import time
+
+
+PROJECT_ROOT = Path(__file__).resolve().parent.parent
+TARGET_BYTES = 2 * 1024 * 1024
+WARMUPS = 2
+REPETITIONS = 13
+
+PROGRAMS = {
+    "cmark": {
+        "baseline": [
+            str(PROJECT_ROOT / ".worktrees" / "cmark" / "build" / "src" / "cmark"),
+            "--unsafe",
+        ],
+        "candidate": [
+            str(
+                PROJECT_ROOT
+                / ".worktrees"
+                / "cmark-candidate"
+                / "build"
+                / "src"
+                / "cmark"
+            ),
+            "--unsafe",
+        ],
+    },
+    "commonmark.js": {
+        "baseline": [
+            "node",
+            str(PROJECT_ROOT / ".worktrees" / "commonmark.js" / "bin" / "commonmark"),
+        ],
+        "candidate": [
+            "node",
+            str(
+                PROJECT_ROOT
+                / ".worktrees"
+                / "commonmark.js-candidate"
+                / "bin"
+                / "commonmark"
+            ),
+        ],
+    },
+}
+
+CORPUS_UNITS = {
+    "normal-prose": (
+        "A paragraph with **strong text**, *emphasis*, punctuation, and "
+        "[a link](https://example.com).\n\n"
+    ),
+    "cjk-heavy": (
+        "これは**「重要なこと」**です。"
+        "这是**我想做的事。**所以继续。**안녕(hello)**하세요.\n\n"
+    ),
+    "delimiter-heavy": (
+        "語***「引用」***語 a**「x」**b 語*「引用」*語 "
+        "語__「強調」__語 a**😀。**b 𠮷**(x)**語\n\n"
+    ),
+}
+
+
+def command_output(command):
+    return subprocess.run(
+        command,
+        text=True,
+        capture_output=True,
+        check=True,
+    ).stdout.strip()
+
+
+def make_corpus(unit):
+    repetitions = TARGET_BYTES // len(unit.encode("utf-8")) + 1
+    return (unit * repetitions).encode("utf-8")
+
+
+def run_once(command, corpus):
+    started = time.perf_counter()
+    subprocess.run(
+        command,
+        input=corpus,
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.PIPE,
+        check=True,
+        timeout=30,
+    )
+    return (time.perf_counter() - started) * 1000
+
+
+def summarize(samples):
+    return {
+        "median_ms": statistics.median(samples),
+        "mean_ms": statistics.fmean(samples),
+        "variance_ms2": statistics.pvariance(samples),
+        "minimum_ms": min(samples),
+        "maximum_ms": max(samples),
+        "samples_ms": samples,
+    }
+
+
+parser = argparse.ArgumentParser()
+parser.add_argument("--output", type=Path)
+args = parser.parse_args()
+
+cpu_model = "unknown"
+cpuinfo = Path("/proc/cpuinfo")
+if cpuinfo.is_file():
+    for line in cpuinfo.read_text(encoding="utf-8").splitlines():
+        if line.startswith("model name"):
+            cpu_model = line.split(":", 1)[1].strip()
+            break
+
+report = {
+    "schema_version": 1,
+    "input_bytes": TARGET_BYTES,
+    "warmups": WARMUPS,
+    "repetitions": REPETITIONS,
+    "environment": {
+        "platform": platform.platform(),
+        "cpu": cpu_model,
+        "python": platform.python_version(),
+        "node": command_output(["node", "--version"]),
+        "cc": command_output(["cc", "--version"]).splitlines()[0],
+    },
+    "results": {},
+}
+
+for engine, versions in PROGRAMS.items():
+    report["results"][engine] = {}
+    for corpus_name, unit in CORPUS_UNITS.items():
+        corpus = make_corpus(unit)
+        for _ in range(WARMUPS):
+            run_once(versions["baseline"], corpus)
+            run_once(versions["candidate"], corpus)
+
+        samples = {"baseline": [], "candidate": []}
+        for repetition in range(REPETITIONS):
+            order = (
+                ("baseline", "candidate")
+                if repetition % 2 == 0
+                else ("candidate", "baseline")
+            )
+            for version in order:
+                samples[version].append(run_once(versions[version], corpus))
+
+        baseline = summarize(samples["baseline"])
+        candidate = summarize(samples["candidate"])
+        delta_percent = (
+            (candidate["median_ms"] - baseline["median_ms"])
+            / baseline["median_ms"]
+            * 100
+        )
+        report["results"][engine][corpus_name] = {
+            "input_bytes": len(corpus),
+            "baseline": baseline,
+            "candidate": candidate,
+            "median_delta_percent": delta_percent,
+        }
+
+serialized = json.dumps(report, indent=2) + "\n"
+if args.output:
+    args.output.parent.mkdir(parents=True, exist_ok=True)
+    args.output.write_text(serialized, encoding="utf-8")
+else:
+    print(serialized, end="")
+
+worst_delta = max(
+    result["median_delta_percent"]
+    for engine_results in report["results"].values()
+    for result in engine_results.values()
+)
+if worst_delta > 10:
+    print(
+        f"Candidate median slowdown exceeds 10%: {worst_delta:.2f}%",
+        file=sys.stderr,
+    )
+    raise SystemExit(1)
