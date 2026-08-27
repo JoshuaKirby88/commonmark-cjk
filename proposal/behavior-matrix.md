@@ -1,6 +1,6 @@
 # Behavior matrix
 
-Status: candidate behavior matrix.
+Status: implemented and verified in the pinned cmark and commonmark.js candidates.
 
 This matrix applies the [candidate narrow rule](rule.md) and [Unicode policy](unicode-policy.md). Exact Markdown and HTML strings live in [`fixtures/emphasis.json`](../fixtures/emphasis.json). The generated delimiter-boundary truth table lives in [`fixtures/generated-boundaries.json`](../fixtures/generated-boundaries.json).
 
@@ -88,14 +88,17 @@ Results:
 - Whitespace never gains invalid opener or closer eligibility.
 - Default emoji, variation selectors, and unassigned code points never count as CJK by themselves.
 
-## Deterministic checks already passing
+## Deterministic checks
 
-`scripts/check-fixtures` currently verifies:
+`scripts/check-fixtures` verifies:
 
 - both untouched reference parsers match `current_html` for all 32 curated cases;
 - cmark and commonmark.js agree on every current result;
 - every `change` flag matches the old-versus-proposed HTML pair;
 - the committed 162-record boundary matrix exactly matches the generator.
 
-Proposed HTML is derived from the normative formula and reviewed as the oracle. It is not copied from either parser.
+Both candidate parsers also pass all 677 proposed CommonMark examples. The fixture oracle was derived from the normative formula before implementation, then checked independently against both candidates.
 
+## Compatibility boundary
+
+The most consequential tradeoffs are the mixed-text changes and the deliberate deferral of variation-selector sequences. Both are recorded explicitly rather than hidden as parser-specific exceptions.

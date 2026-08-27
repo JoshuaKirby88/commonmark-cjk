@@ -1,6 +1,6 @@
 # Candidate narrow rule
 
-Status: local proposal for behavior-matrix review. This is not ready for upstream submission.
+Status: implemented and verified in the pinned cmark and commonmark.js candidates.
 
 ## Objective
 

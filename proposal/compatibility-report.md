@@ -1,6 +1,6 @@
 # Compatibility report
 
-Status: compatibility candidate.
+Status: verified against the pinned cmark and commonmark.js candidates.
 
 This report covers the frozen narrow rule implemented in the pinned cmark and
 commonmark.js candidates. Exact Markdown and HTML pairs are in
@@ -124,3 +124,6 @@ definition. The generator reproduces the same 68 ranges for both parsers.
 | Unexplained differences | 0 | None |
 | Known defects | 0 | None |
 
+## Compatibility conclusion
+
+The candidate intentionally changes all 21 curated cases listed above, including ten direct consequences of the character-based rule. It also intentionally defers variation-selector-dependent behavior. No tested output difference remains unexplained.

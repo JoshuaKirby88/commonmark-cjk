@@ -1,6 +1,8 @@
 # Review protocol
 
-Status: review in progress.
+Status: native Japanese review complete; Chinese, Korean, and independent implementation reviews pending.
+
+Completed responses and conclusions are published in [results.md](results.md).
 
 The review checks two claims that parser tests cannot establish:
 

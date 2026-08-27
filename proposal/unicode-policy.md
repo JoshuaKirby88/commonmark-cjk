@@ -1,6 +1,6 @@
 # Candidate Unicode policy
 
-Status: local proposal for behavior-matrix review.
+Status: implemented and verified in the pinned cmark and commonmark.js candidates.
 
 ## Normative classification
 
