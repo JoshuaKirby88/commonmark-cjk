@@ -1,0 +1,286 @@
+{
+  "schema_version": 1,
+  "unicode_version": "17.0.0",
+  "definition": "assigned and (((EAW in W,F,H) and not Emoji_Presentation) or Script=Hangul)",
+  "inputs": {
+    "DerivedGeneralCategory.txt": "d62e5bab70ca74f099343f71224fa051cb1fdd61a1ab45c0488c44cfc0b6102e",
+    "EastAsianWidth.txt": "ea7ce50f3444a050333448dffef1cadd9325af55cbb764b4a2280faf52170a33",
+    "Scripts.txt": "9f5e50d3abaee7d6ce09480f325c706f485ae3240912527e651954d2d6b035bf",
+    "emoji-data.txt": "2cb2bb9455cda83e8481541ecf5b6dfda66a3bb89efa3fa7c5297eccf607b72b"
+  },
+  "range_count": 68,
+  "ranges": [
+    {
+      "first": "U+1100",
+      "last": "U+11FF"
+    },
+    {
+      "first": "U+20A9",
+      "last": "U+20A9"
+    },
+    {
+      "first": "U+2329",
+      "last": "U+232A"
+    },
+    {
+      "first": "U+2630",
+      "last": "U+2637"
+    },
+    {
+      "first": "U+268A",
+      "last": "U+268F"
+    },
+    {
+      "first": "U+2E80",
+      "last": "U+2E99"
+    },
+    {
+      "first": "U+2E9B",
+      "last": "U+2EF3"
+    },
+    {
+      "first": "U+2F00",
+      "last": "U+2FD5"
+    },
+    {
+      "first": "U+2FF0",
+      "last": "U+303E"
+    },
+    {
+      "first": "U+3041",
+      "last": "U+3096"
+    },
+    {
+      "first": "U+3099",
+      "last": "U+30FF"
+    },
+    {
+      "first": "U+3105",
+      "last": "U+312F"
+    },
+    {
+      "first": "U+3131",
+      "last": "U+318E"
+    },
+    {
+      "first": "U+3190",
+      "last": "U+31E5"
+    },
+    {
+      "first": "U+31EF",
+      "last": "U+321E"
+    },
+    {
+      "first": "U+3220",
+      "last": "U+3247"
+    },
+    {
+      "first": "U+3250",
+      "last": "U+A48C"
+    },
+    {
+      "first": "U+A490",
+      "last": "U+A4C6"
+    },
+    {
+      "first": "U+A960",
+      "last": "U+A97C"
+    },
+    {
+      "first": "U+AC00",
+      "last": "U+D7A3"
+    },
+    {
+      "first": "U+D7B0",
+      "last": "U+D7C6"
+    },
+    {
+      "first": "U+D7CB",
+      "last": "U+D7FB"
+    },
+    {
+      "first": "U+F900",
+      "last": "U+FA6D"
+    },
+    {
+      "first": "U+FA70",
+      "last": "U+FAD9"
+    },
+    {
+      "first": "U+FE10",
+      "last": "U+FE19"
+    },
+    {
+      "first": "U+FE30",
+      "last": "U+FE52"
+    },
+    {
+      "first": "U+FE54",
+      "last": "U+FE66"
+    },
+    {
+      "first": "U+FE68",
+      "last": "U+FE6B"
+    },
+    {
+      "first": "U+FF01",
+      "last": "U+FFBE"
+    },
+    {
+      "first": "U+FFC2",
+      "last": "U+FFC7"
+    },
+    {
+      "first": "U+FFCA",
+      "last": "U+FFCF"
+    },
+    {
+      "first": "U+FFD2",
+      "last": "U+FFD7"
+    },
+    {
+      "first": "U+FFDA",
+      "last": "U+FFDC"
+    },
+    {
+      "first": "U+FFE0",
+      "last": "U+FFE6"
+    },
+    {
+      "first": "U+FFE8",
+      "last": "U+FFEE"
+    },
+    {
+      "first": "U+16FE0",
+      "last": "U+16FE4"
+    },
+    {
+      "first": "U+16FF0",
+      "last": "U+16FF6"
+    },
+    {
+      "first": "U+17000",
+      "last": "U+18CD5"
+    },
+    {
+      "first": "U+18CFF",
+      "last": "U+18D1E"
+    },
+    {
+      "first": "U+18D80",
+      "last": "U+18DF2"
+    },
+    {
+      "first": "U+1AFF0",
+      "last": "U+1AFF3"
+    },
+    {
+      "first": "U+1AFF5",
+      "last": "U+1AFFB"
+    },
+    {
+      "first": "U+1AFFD",
+      "last": "U+1AFFE"
+    },
+    {
+      "first": "U+1B000",
+      "last": "U+1B122"
+    },
+    {
+      "first": "U+1B132",
+      "last": "U+1B132"
+    },
+    {
+      "first": "U+1B150",
+      "last": "U+1B152"
+    },
+    {
+      "first": "U+1B155",
+      "last": "U+1B155"
+    },
+    {
+      "first": "U+1B164",
+      "last": "U+1B167"
+    },
+    {
+      "first": "U+1B170",
+      "last": "U+1B2FB"
+    },
+    {
+      "first": "U+1D300",
+      "last": "U+1D356"
+    },
+    {
+      "first": "U+1D360",
+      "last": "U+1D376"
+    },
+    {
+      "first": "U+1F200",
+      "last": "U+1F200"
+    },
+    {
+      "first": "U+1F202",
+      "last": "U+1F202"
+    },
+    {
+      "first": "U+1F210",
+      "last": "U+1F219"
+    },
+    {
+      "first": "U+1F21B",
+      "last": "U+1F22E"
+    },
+    {
+      "first": "U+1F230",
+      "last": "U+1F231"
+    },
+    {
+      "first": "U+1F237",
+      "last": "U+1F237"
+    },
+    {
+      "first": "U+1F23B",
+      "last": "U+1F23B"
+    },
+    {
+      "first": "U+1F240",
+      "last": "U+1F248"
+    },
+    {
+      "first": "U+1F260",
+      "last": "U+1F265"
+    },
+    {
+      "first": "U+20000",
+      "last": "U+2A6DF"
+    },
+    {
+      "first": "U+2A700",
+      "last": "U+2B81D"
+    },
+    {
+      "first": "U+2B820",
+      "last": "U+2CEAD"
+    },
+    {
+      "first": "U+2CEB0",
+      "last": "U+2EBE0"
+    },
+    {
+      "first": "U+2EBF0",
+      "last": "U+2EE5D"
+    },
+    {
+      "first": "U+2F800",
+      "last": "U+2FA1D"
+    },
+    {
+      "first": "U+30000",
+      "last": "U+3134A"
+    },
+    {
+      "first": "U+31350",
+      "last": "U+33479"
+    }
+  ]
+}

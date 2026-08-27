@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+import argparse
 import json
 from pathlib import Path
 import subprocess
@@ -10,14 +11,34 @@ PROJECT_ROOT = Path(__file__).resolve().parent.parent
 FIXTURE_PATH = PROJECT_ROOT / "fixtures" / "emphasis.json"
 GENERATED_PATH = PROJECT_ROOT / "fixtures" / "generated-boundaries.json"
 
+parser = argparse.ArgumentParser()
+parser.add_argument("--candidate", action="store_true")
+args = parser.parse_args()
+
+checkout_suffix = "-candidate" if args.candidate else ""
+expected_field = "proposed_html" if args.candidate else "current_html"
+
 PROGRAMS = {
     "cmark": [
-        str(PROJECT_ROOT / ".worktrees" / "cmark" / "build" / "src" / "cmark"),
+        str(
+            PROJECT_ROOT
+            / ".worktrees"
+            / f"cmark{checkout_suffix}"
+            / "build"
+            / "src"
+            / "cmark"
+        ),
         "--unsafe",
     ],
     "commonmark.js": [
         "node",
-        str(PROJECT_ROOT / ".worktrees" / "commonmark.js" / "bin" / "commonmark"),
+        str(
+            PROJECT_ROOT
+            / ".worktrees"
+            / f"commonmark.js{checkout_suffix}"
+            / "bin"
+            / "commonmark"
+        ),
     ],
 }
 
@@ -56,10 +77,10 @@ for case in cases:
 
     for name, program in PROGRAMS.items():
         actual = render(program, case["markdown"])
-        if actual != case["current_html"]:
+        if actual != case[expected_field]:
             fail(
-                f"{name} baseline differs for {case_id}\n"
-                f"expected: {case['current_html']!r}\n"
+                f"{name} output differs for {case_id}\n"
+                f"expected: {case[expected_field]!r}\n"
                 f"actual:   {actual!r}"
             )
 
@@ -74,7 +95,8 @@ if generated != committed_generated:
     fail("fixtures/generated-boundaries.json is stale. Run scripts/generate-cases.")
 
 changed = sum(case["change"] for case in cases)
+mode = "candidate" if args.candidate else "baseline"
 print(
-    f"Fixture oracle verified: {len(cases)} curated cases, "
+    f"Fixture oracle verified against {mode}: {len(cases)} curated cases, "
     f"{changed} proposed changes, {len(cases) - changed} protected results."
 )

@@ -8,6 +8,11 @@ worktree_root="$project_root/.worktrees"
 # shellcheck source=../upstreams.lock
 source "$project_root/upstreams.lock"
 
+if [[ $# -gt 1 || ( $# -eq 1 && $1 != "--baseline" ) ]]; then
+  echo "Usage: scripts/verify [--baseline]" >&2
+  exit 1
+fi
+
 "$project_root/scripts/bootstrap"
 
 verify_commit() {
@@ -68,3 +73,29 @@ verify_clean cmark
 verify_clean commonmark.js
 
 echo "Baseline verified: 655 CommonMark examples pass in both reference parsers."
+
+if [[ ${1:-} == "--baseline" ]]; then
+  exit 0
+fi
+
+"$project_root/scripts/bootstrap-candidate"
+
+candidate_cmark_program="$worktree_root/cmark-candidate/build/src/cmark --unsafe"
+candidate_commonmark_js_program="node $worktree_root/commonmark.js-candidate/bin/commonmark"
+
+ctest --test-dir "$worktree_root/cmark-candidate/build" --output-on-failure
+npm test --prefix "$worktree_root/commonmark.js-candidate"
+npm run lint --prefix "$worktree_root/commonmark.js-candidate"
+
+PYTHONDONTWRITEBYTECODE=1 python3 "$spec_runner" \
+  --spec "$spec_file" \
+  --program "$candidate_cmark_program"
+
+PYTHONDONTWRITEBYTECODE=1 python3 "$spec_runner" \
+  --spec "$spec_file" \
+  --program "$candidate_commonmark_js_program"
+
+"$project_root/scripts/check-fixtures" --candidate
+"$project_root/scripts/generate-unicode-tables" --check
+
+echo "Candidate verified: both parsers match all proposed fixtures and 655 existing CommonMark examples."

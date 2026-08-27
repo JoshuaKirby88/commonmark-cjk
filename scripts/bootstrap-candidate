@@ -1,0 +1,144 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+project_root=$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)
+worktree_root="$project_root/.worktrees"
+
+# shellcheck source=../upstreams.lock
+source "$project_root/upstreams.lock"
+
+require_command() {
+  if ! command -v "$1" >/dev/null 2>&1; then
+    echo "Required command is missing: $1" >&2
+    exit 1
+  fi
+}
+
+ensure_candidate() {
+  local name=$1
+  local url=$2
+  local commit=$3
+  local patch=$4
+  local checkout="$worktree_root/$name-candidate"
+
+  if [[ ! -d "$checkout/.git" ]]; then
+    git clone --no-checkout --origin upstream "$url" "$checkout"
+    git -C "$checkout" checkout --detach "$commit"
+  fi
+
+  local actual_url
+  actual_url=$(git -C "$checkout" remote get-url upstream)
+  if [[ "$actual_url" != "$url" ]]; then
+    echo "$name candidate has an unexpected upstream URL: $actual_url" >&2
+    exit 1
+  fi
+
+  local actual_commit
+  actual_commit=$(git -C "$checkout" rev-parse HEAD)
+  if [[ "$actual_commit" != "$commit" ]]; then
+    echo "$name candidate is at $actual_commit, expected $commit" >&2
+    exit 1
+  fi
+
+  if [[ -z $(git -C "$checkout" status --porcelain) ]]; then
+    git -C "$checkout" apply --index "$patch"
+  fi
+
+  if ! git -C "$checkout" diff --quiet; then
+    echo "$name candidate has unstaged source changes." >&2
+    exit 1
+  fi
+
+  local untracked
+  untracked=$(git -C "$checkout" ls-files --others --exclude-standard)
+  if [[ -n "$untracked" ]]; then
+    echo "$name candidate has unexpected untracked files:" >&2
+    echo "$untracked" >&2
+    exit 1
+  fi
+
+  if ! cmp -s "$patch" <(git -C "$checkout" diff --cached --binary); then
+    echo "$name candidate does not match $patch" >&2
+    exit 1
+  fi
+}
+
+ensure_unicode_file() {
+  local filename=$1
+  local url=$2
+  local expected_hash=$3
+  local destination="$worktree_root/unicode-17/$filename"
+
+  if [[ ! -f "$destination" ]]; then
+    curl -fsSLo "$destination" "$url"
+  fi
+
+  local actual_hash
+  actual_hash=$(sha256sum "$destination" | cut -d ' ' -f 1)
+  if [[ "$actual_hash" != "$expected_hash" ]]; then
+    echo "$filename has hash $actual_hash, expected $expected_hash" >&2
+    exit 1
+  fi
+}
+
+require_command cmake
+require_command curl
+require_command git
+require_command npm
+require_command python3
+require_command sha256sum
+
+mkdir -p "$worktree_root/unicode-17"
+
+ensure_candidate cmark "$CMARK_URL" "$CMARK_COMMIT" \
+  "$project_root/patches/cmark.patch"
+ensure_candidate commonmark.js "$COMMONMARK_JS_URL" "$COMMONMARK_JS_COMMIT" \
+  "$project_root/patches/commonmark.js.patch"
+
+ensure_unicode_file DerivedGeneralCategory.txt \
+  "$UNICODE_DERIVED_GENERAL_CATEGORY_URL" \
+  "$UNICODE_DERIVED_GENERAL_CATEGORY_SHA256"
+ensure_unicode_file EastAsianWidth.txt \
+  "$UNICODE_EAST_ASIAN_WIDTH_URL" \
+  "$UNICODE_EAST_ASIAN_WIDTH_SHA256"
+ensure_unicode_file Scripts.txt \
+  "$UNICODE_SCRIPTS_URL" \
+  "$UNICODE_SCRIPTS_SHA256"
+ensure_unicode_file emoji-data.txt \
+  "$UNICODE_EMOJI_DATA_URL" \
+  "$UNICODE_EMOJI_DATA_SHA256"
+
+"$project_root/scripts/generate-unicode-tables" --check
+
+lock_source="$project_root/locks/commonmark.js-package-lock.json"
+actual_lock_hash=$(sha256sum "$lock_source" | cut -d ' ' -f 1)
+if [[ "$actual_lock_hash" != "$COMMONMARK_JS_LOCK_SHA256" ]]; then
+  echo "The commonmark.js dependency lock hash does not match upstreams.lock." >&2
+  exit 1
+fi
+
+js_checkout="$worktree_root/commonmark.js-candidate"
+js_lock="$js_checkout/package-lock.json"
+if [[ -e "$js_lock" ]]; then
+  echo "Refusing to overwrite an existing candidate package-lock.json." >&2
+  exit 1
+fi
+
+cleanup_js_lock() {
+  rm -f "$js_lock"
+}
+trap cleanup_js_lock EXIT
+
+cp "$lock_source" "$js_lock"
+npm ci --ignore-scripts --no-audit --no-fund --prefix "$js_checkout"
+cleanup_js_lock
+trap - EXIT
+
+cmake -S "$worktree_root/cmark-candidate" \
+  -B "$worktree_root/cmark-candidate/build" \
+  -DCMAKE_EXPORT_COMPILE_COMMANDS=ON \
+  -DBUILD_SHARED_LIBS=YES
+cmake --build "$worktree_root/cmark-candidate/build"
+
+echo "Pinned candidate checkouts, Unicode data, and dependencies are ready."
