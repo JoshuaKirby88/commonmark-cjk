@@ -6,11 +6,9 @@ The immediate goal is a focused, reviewable change to the CommonMark specificati
 
 ## Current status
 
-The project is preparing a focused CommonMark proposal.
+The narrow candidate has passed local conformance, compatibility, robustness, and performance verification.
 
-We are still choosing the exact normative boundary. No implementation scope has been accepted yet.
-
-The leading option is the narrow rule tested by the CommonMark maintainers in 2024: when a delimiter run is adjacent to a defined CJK character, treat it as both left-flanking and right-flanking. Before implementing it, we need agreement on the character definition and on which Unicode sequence edge cases belong in the first proposal.
+The candidate uses the narrow rule tested by CommonMark maintainers in 2024. It adds CJK-aware flanking for emphasis delimiter runs, uses a Unicode 17 property definition, preserves whitespace and underscore restrictions, and defers sequence-aware variation handling.
 
 ## Proposed first scope
 
@@ -37,6 +35,8 @@ Defer:
 - `proposal/behavior-matrix.md` lists intended changes and protected behavior.
 - `proposal/rule.md` and `proposal/unicode-policy.md` define the narrow candidate.
 - `proposal/compatibility-report.md` and `proposal/performance-report.md` record verification results.
+- `review/README.md` describes the language and independent-implementer review protocol.
+- `review/language-review.md` and `review/implementer-review.md` are the two review forms.
 - `patches/commonmark-spec.patch`, `patches/cmark.patch`, and `patches/commonmark.js.patch` contain the three pinned candidate diffs.
 - `scripts/verify` reproduces the baseline and the local parser candidates with read-only upstream access.
 - `scripts/verify --baseline` runs only the untouched-parser checks.
