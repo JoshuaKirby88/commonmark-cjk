@@ -31,7 +31,7 @@ failure in Japanese, Chinese, and Korean.
 
 | Fixture | Purpose |
 | --- | --- |
-| `ja-simple-quoted` | Fixes the short neutral Japanese quotation pattern |
+| `ja-simple-quoted` | Covers a short neutral Japanese quotation pattern |
 | `ja-sentence-punctuation` | Closes strong emphasis after `。` |
 | `ja-corner-quotes-strong` | Handles Japanese corner quotes with `**` |
 | `ja-corner-quotes-emphasis` | Applies the same rule to `*` |

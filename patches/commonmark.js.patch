@@ -145,7 +145,7 @@ index d2907b7..1ba122b 100644
          can_open = left_flanking && (!right_flanking || before_is_punctuation);
          can_close = right_flanking && (!left_flanking || after_is_punctuation);
 diff --git a/test/regression.txt b/test/regression.txt
-index a3f2d7d..a7bbd64 100644
+index a3f2d7d..d40f6b3 100644
 --- a/test/regression.txt
 +++ b/test/regression.txt
 @@ -60,7 +60,7 @@ Issue #108 - Chinese punctuation not recognized

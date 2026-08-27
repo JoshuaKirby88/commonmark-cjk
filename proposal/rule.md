@@ -42,7 +42,7 @@ This wording is more exact than saying every CJK-adjacent run is automatically b
 
 The existing rules that turn flanking runs into openers and closers remain unchanged.
 
-For `*` and `**`, left-flanking controls opening and right-flanking controls closing. The new condition therefore fixes the simple Japanese quotation:
+For `*` and `**`, left-flanking controls opening and right-flanking controls closing. The new condition therefore fixes this ordinary Japanese pattern:
 
 ```markdown
 これは**「重要なこと」**です。

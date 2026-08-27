@@ -6,19 +6,19 @@ Markdown commonly uses two asterisks to request bold text. Current CommonMark le
 
 Please review only the section for a language you read natively or write with near-native professional fluency. Judge what an author would reasonably expect when typing the shown Markdown. The sample wording does not need to be stylistically perfect.
 
-For each case, answer one of:
+For every scored case, answer with one letter. The labels have the same meaning throughout the form:
 
-- `proposal is natural`;
-- `proposal is acceptable but context-dependent`;
-- `current literal result is preferable`;
-- `proposal is clearly wrong`;
-- `unsure`.
+- `A`: proposed result is natural or acceptable;
+- `B`: proposed result is acceptable only in some contexts;
+- `C`: a different result is preferable;
+- `D`: proposed result is clearly wrong;
+- `E`: unsure.
 
-Add a short reason for any answer other than `proposal is natural`.
+You can respond with lines such as `JA-01: A`. Add a short reason for `B`, `C`, or `D`. An answer records evidence; it does not automatically change the proposal.
 
 ## Japanese
 
-### JA-01: quoted phrase
+### JA-01: simple quoted phrase
 
 Source Markdown:
 
@@ -32,9 +32,9 @@ Current result:
 
 Proposed result:
 
-<div lang="ja">みたいに、<strong>「何かの状態を判断する指標・目安」</strong>という比喩的な意味でも使います。</div>
+<div lang="ja">これは<strong>「重要なこと」</strong>です。</div>
 
-Answer: __________
+Answer, `A` through `E`: __________
 
 ### JA-02: Japanese full stop inside the bold span
 
@@ -52,7 +52,7 @@ Proposed result:
 
 <div lang="ja">これは<strong>私のやりたかったこと。</strong>だからするの。</div>
 
-Answer: __________
+Answer, `A` through `E`: __________
 
 ## Chinese
 
@@ -74,7 +74,7 @@ Proposed result:
 
 <div lang="zh-Hans">这是<strong>我想做的事。</strong>所以继续。</div>
 
-Answer: __________
+Answer, `A` through `E`: __________
 
 ### ZH-02: punctuation-only boundary test
 
@@ -94,7 +94,7 @@ Proposed result:
 
 <div lang="zh-Hans"><strong>。</strong>话</div>
 
-Answer: __________
+Answer, `A` through `E`: __________
 
 ## Korean
 
@@ -114,7 +114,7 @@ Proposed result:
 
 <div lang="ko"><strong>안녕(hello)</strong>하세요.</div>
 
-Answer: __________
+Answer, `A` through `E`: __________
 
 ### KO-02: linked term followed by a Korean particle
 
@@ -132,7 +132,7 @@ Proposed result:
 
 <div lang="ko">문서를 만들 때 Excel 대신 <strong><a href="https://commonmark.org/help/">Markdown</a></strong>을 사용하세요.</div>
 
-Answer: __________
+Answer, `A` through `E`: __________
 
 ## Shared policy checks
 
@@ -151,7 +151,9 @@ Proposed result:
 
 <div lang="ja">語<strong>「強調」</strong>語<br>語__「強調」__語</div>
 
-Should the underscore line also become bold? `yes`, `no`, or `unsure`: __________
+Is the proposed difference between the asterisk and underscore lines acceptable?
+
+Answer, `A` through `E`: __________
 
 ### L-02: spaces still prevent formatting
 
@@ -162,7 +164,9 @@ Both lines remain literal because a delimiter touches a space on its content sid
 語**強調 **語
 ```
 
-Is keeping these literal reasonable? `yes`, `no`, or `unsure`: __________
+Is the proposed literal behavior acceptable?
+
+Answer, `A` through `E`: __________
 
 ### L-03: mixed Latin and CJK punctuation
 
@@ -176,7 +180,9 @@ Proposed result:
 
 <div lang="en">a<strong>「x」</strong>b</div>
 
-Is this behavior acceptable? `yes`, `no`, `context-dependent`, or `unsure`: __________
+Is this proposed behavior acceptable?
+
+Answer, `A` through `E`: __________
 
 ### L-04: anything missing
 

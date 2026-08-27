@@ -1,5 +1,5 @@
 diff --git a/spec.txt b/spec.txt
-index bf752d8..b82e330 100644
+index bf752d8..81cc5d9 100644
 --- a/spec.txt
 +++ b/spec.txt
 @@ -340,6 +340,14 @@ is `!`, `"`, `#`, `$`, `%`, `&`, `'`, `(`, `)`,

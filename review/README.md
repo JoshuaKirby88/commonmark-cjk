@@ -41,6 +41,18 @@ The review is complete when:
 
 Silence is not evidence. Missing reviews remain open. Review feedback informs the proposal but does not by itself determine a rule change.
 
+## How answers affect the proposal
+
+The answer labels are evidence, not votes that automatically change code:
+
+- `A` supports the proposed result and requires no change.
+- `B` identifies context that we must record. It may improve an example or explanation, but it does not by itself change semantics.
+- `C` identifies a preferred alternative. It requires investigation of the scope and compatibility cost.
+- `D` identifies a clearly wrong result. It blocks review completion until the result is revised, justified, or removed from scope.
+- `E` is an abstention. It supplies neither support nor an objection and triggers no code change.
+
+If every reviewer answers `E` to a shared policy check such as `L-01` or `L-02`, retain the narrow behavior and record the uncertainty. Seek another opinion if practical, but do not expand the proposal without affirmative evidence and compatibility analysis.
+
 ## Privacy boundary
 
 The published review record contains only:

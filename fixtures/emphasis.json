@@ -9,7 +9,7 @@
       "current_html": "<p>これは**「重要なこと」**です。</p>\n",
       "proposed_html": "<p>これは<strong>「重要なこと」</strong>です。</p>\n",
       "change": true,
-      "rationale": "Reported Japanese failure with CJK punctuation on both strong-emphasis boundaries.",
+      "rationale": "A short neutral Japanese sentence with CJK punctuation on both strong-emphasis boundaries.",
       "tags": ["asterisk", "strong", "cjk-punctuation", "realistic"]
     },
     {
@@ -155,11 +155,11 @@
     {
       "id": "ja-simple-quoted-underscore",
       "language": "ja",
-      "markdown": "みたいに、__「何かの状態を判断する指標・目安」__という比喩的な意味でも使います。",
-      "current_html": "<p>みたいに、__「何かの状態を判断する指標・目安」__という比喩的な意味でも使います。</p>\n",
-      "proposed_html": "<p>みたいに、__「何かの状態を判断する指標・目安」__という比喩的な意味でも使います。</p>\n",
+      "markdown": "これは__「重要なこと」__です。",
+      "current_html": "<p>これは__「重要なこと」__です。</p>\n",
+      "proposed_html": "<p>これは__「重要なこと」__です。</p>\n",
       "change": false,
-      "rationale": "The exact report remains literal when underscore delimiters are substituted.",
+      "rationale": "The neutral Japanese example remains literal when underscore delimiters are substituted.",
       "tags": ["underscore", "strong", "cjk-punctuation", "protected"]
     },
     {

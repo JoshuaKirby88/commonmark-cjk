@@ -143,7 +143,7 @@ index bf765ea..283d217 100644
      *can_open = left_flanking &&
                  (!right_flanking ||
 diff --git a/test/regression.txt b/test/regression.txt
-index 2eb8184..a3b076a 100644
+index 2eb8184..5478419 100644
 --- a/test/regression.txt
 +++ b/test/regression.txt
 @@ -331,3 +331,40 @@ garbage on the same line must not be treated as a title.
